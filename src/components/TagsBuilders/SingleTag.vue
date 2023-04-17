@@ -1,7 +1,7 @@
 <template>
   <div class="tag-single">
     <p class="tag-title">{{ tag.tagName }}</p>
-    <p>{{ tag.tagAttributes }}</p>
+    <input v-model="tag.tagAttributes" />
   </div>
 </template>
 
@@ -27,6 +27,12 @@ export default {
     padding: 0 10px;
     color: #ccc;
     font-weight: bold;
+  }
+
+  &:hover {
+    opacity: 0.75;
+    background-color: #ccc;
+    cursor: pointer;
   }
 }
 </style>

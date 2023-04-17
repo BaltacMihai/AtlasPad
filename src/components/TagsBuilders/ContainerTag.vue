@@ -4,6 +4,8 @@
     <template v-for="tagChild in tag.content">
       <DynamicTag :tag="tagChild" />
     </template>
+
+    <div class="btn" @click="addElement">ADD</div>
   </div>
 </template>
 
@@ -19,6 +21,18 @@ export default {
   },
   data() {
     return {};
+  },
+  methods: {
+    addElement() {
+      const newElement = {
+        tagName: "a",
+        tagAttributes: "New Element Added",
+        tagType: "selfClose",
+        content: false,
+      };
+
+      this.tag.content.push(newElement);
+    },
   },
 };
 </script>
