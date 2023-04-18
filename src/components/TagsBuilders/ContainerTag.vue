@@ -5,7 +5,7 @@
       <DynamicTag :tag="tagChild" />
     </template>
 
-    <div class="btn" @click="addElement">ADD</div>
+    <img class="addItem" @click="addElement" src="@/assets/icons/additem.svg" />
   </div>
 </template>
 
@@ -55,6 +55,14 @@ export default {
     padding: 0 10px;
     color: #5d60ef;
     font-weight: bold;
+  }
+
+  .addItem {
+    width: 25px;
+    margin: 0 auto;
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 </style>
