@@ -8,6 +8,7 @@ export default {
   props: {
     tag: Object,
   },
+
   computed: {
     componentName() {
       switch (this.tag.tagType) {

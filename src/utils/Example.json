@@ -38,5 +38,45 @@
         ]
       }
     ]
+  },
+  {
+    "tagName": "div",
+    "tagAttributes": "id: 'cdva'",
+    "tagType": "container",
+    "content": [
+      {
+        "tagName": "p",
+        "tagAttributes": "class: 'altceva'",
+        "tagType": "text",
+
+        "content": "Paragraf"
+      },
+      {
+        "tagName": "a",
+        "tagAttributes": "href: '#'",
+        "tagType": "selfClose",
+        "content": false
+      },
+      {
+        "tagName": "div",
+        "tagAttributes": "id: 'al 2lea div'",
+        "tagType": "container",
+        "content": [
+          {
+            "tagName": "p",
+            "tagAttributes": "class: 'altceva'",
+            "tagType": "text",
+
+            "content": "Paragraf"
+          },
+          {
+            "tagName": "a",
+            "tagAttributes": "href: '#'",
+            "tagType": "selfClose",
+            "content": false
+          }
+        ]
+      }
+    ]
   }
 ]

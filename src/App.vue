@@ -21,8 +21,8 @@ export default {
 
 <template>
   <div class="content">
-    <TagsTree :contentJson="exampleTest[0]" :pageName="pageSettings.name" />
-    <Form :pageSettings="pageSettings" :pageContent="exampleTest[0]" />
+    <TagsTree :contentJson="exampleTest" :pageName="pageSettings.name" />
+    <Form :pageSettings="pageSettings" :pageContent="exampleTest" />
   </div>
 </template>
 

@@ -1,5 +1,7 @@
 <template>
-  <component :is="dynamicComponent" :tag="this.tag" />
+  <template v-for="tag in tags">
+    <component :is="dynamicComponent(tag)" :tag="tag" @delete="deleteTag" />
+  </template>
 </template>
 <script>
 import SingleTag from "./TagsBuilders/SingleTag.vue";
@@ -8,14 +10,21 @@ import DynamicTag from "./TagsBuilders/DynamicTag.vue";
 
 export default {
   props: {
-    tag: Object,
+    tags: Object,
   },
   data() {
     return {};
   },
-  computed: {
-    dynamicComponent() {
-      switch (this.tag.tagType) {
+  methods: {
+    deleteTag(tag) {
+      console.log({ tag }, this.tags);
+      const index = this.tags.indexOf(tag);
+      if (index !== -1) {
+        this.tags.splice(index, 1);
+      }
+    },
+    dynamicComponent(tag) {
+      switch (tag.tagType) {
         case "selfClose":
           return SingleTag;
         case "text":
