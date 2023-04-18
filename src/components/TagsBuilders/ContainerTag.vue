@@ -40,7 +40,8 @@ export default {
 <style lang="scss" scoped>
 .tag-container {
   padding: 1rem;
-  border: 3px solid #ccc;
+  border: 1px solid #ded7fb;
+  border-radius: 10px;
   position: relative;
   display: flex;
   flex-direction: column;
@@ -48,11 +49,11 @@ export default {
 
   .tag-title {
     position: absolute;
-    top: -1.75rem;
+    top: -1rem;
     left: 1rem;
-    background: white;
+    background: #fcfbfc;
     padding: 0 10px;
-    color: #ccc;
+    color: #5d60ef;
     font-weight: bold;
   }
 }

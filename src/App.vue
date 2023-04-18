@@ -1,37 +1,39 @@
 <script>
 import exampleTest from "./utils/Example.json";
-import compileJsonToMDX from "./utils/CompileJson2MDX";
-import generateMDXFile from "./utils/GenerateMDXFile";
-import TagBuilder from "./components/TagsTreeBuilder.vue";
-
+import TagsTree from "./components/TagsTree.vue";
+import Form from "./components/Form.vue";
 export default {
   components: {
-    TagBuilder,
+    TagsTree,
+    Form,
   },
   data() {
-    return {
-      exampleTest,
-      exempleTag: exampleTest[0],
-    };
-  },
-
-  computed: {
-    compiledCode() {
-      generateMDXFile(exampleTest[0]);
-
-      return compileJsonToMDX(exampleTest[0]);
-    },
+    return { exampleTest, pageSettings: {} };
   },
 };
 </script>
 
 <template>
-  <h1>Example Text</h1>
-  <h2>Json:</h2>
-  <p>{{ exempleTag }}</p>
-
-  <!-- <h2>Compiled</h2>
-  <p>{{ compiledCode }}</p>
-  <h2>Tags</h2> -->
-  <TagBuilder :tag="exempleTag" />
+  <div class="content">
+    <TagsTree :contentJson="exampleTest[0]" />
+    <Form />
+  </div>
 </template>
+
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+}
+body {
+  background-color: #fcfbfc;
+}
+
+.content {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+}
+</style>
