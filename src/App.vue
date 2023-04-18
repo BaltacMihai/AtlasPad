@@ -8,7 +8,13 @@ export default {
     Form,
   },
   data() {
-    return { exampleTest, pageSettings: {} };
+    return {
+      exampleTest,
+      pageSettings: {
+        name: "New Page",
+        frontMatter: "",
+      },
+    };
   },
 };
 </script>
@@ -16,7 +22,7 @@ export default {
 <template>
   <div class="content">
     <TagsTree :contentJson="exampleTest[0]" />
-    <Form />
+    <Form :pageSettings="pageSettings" :pageContent="exampleTest[0]" />
   </div>
 </template>
 
