@@ -1,7 +1,23 @@
 <template>
   <div class="form">
-    <div class="content">
-      <p>Global Form</p>
+    <div class="form-content">
+      <div class="input">
+        <label for="pageName">Page Name</label>
+        <input
+          type="text"
+          v-model="pageSettings.name"
+          id="pageName"
+          title="pageName"
+        />
+      </div>
+      <div class="input">
+        <label for="frontMatter">Front Matter</label>
+        <textarea
+          v-model="pageSettings.frontMatter"
+          id="frontMatter"
+          title="frontMatter"
+        />
+      </div>
     </div>
 
     <div class="btn">
@@ -40,19 +56,19 @@ export default {
   },
   methods: {
     saveAsMdxFile() {
-      generateMdxFile(this.pageContent, this.pageSettings.name, "mdx");
+      generateMdxFile(this.pageContent, this.pageSettings, "mdx");
     },
     openMoreOptionsToSave() {
       this.moreOptionsIsActive = !this.moreOptionsIsActive;
     },
     saveAsTxtFile() {
-      generateMdxFile(this.pageContent, this.pageSettings.name, "txt");
+      generateMdxFile(this.pageContent, this.pageSettings, "txt");
     },
     saveAsHtmlFile() {
-      generateMdxFile(this.pageContent, this.pageSettings.name, "html");
+      generateMdxFile(this.pageContent, this.pageSettings, "html");
     },
     saveAsJsonFile() {
-      generateJsonFile(this.pageContent, this.pageSettings.name);
+      generateJsonFile(this.pageContent, this.pageSettings);
     },
   },
 };
@@ -73,6 +89,40 @@ export default {
 
   width: 15%;
   padding: 2rem;
+
+  .form-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    .input {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      width: 100%;
+
+      label {
+        color: #5d60ef;
+        font-weight: bold;
+      }
+
+      input,
+      textarea {
+        border: 1px solid #5d60ef;
+        padding: 0.5rem;
+        font-size: 1rem;
+        border-radius: 5px;
+        &:is(:hover, :focus, :focus-visible) {
+          border: 1px solid #5d60ef;
+          outline: none;
+        }
+      }
+      textarea {
+        height: 15rem;
+        resize: vertical;
+      }
+    }
+  }
 
   .btn {
     width: 100%;

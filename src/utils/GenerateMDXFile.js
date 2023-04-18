@@ -1,12 +1,12 @@
 import compileJsonToMDX from "./CompileJson2MDX";
 import { saveAs } from "file-saver";
 
-export default function generateMdxFile(tag, fileName, fileExtension) {
+export default function generateMdxFile(tag, fileSettings, fileExtension) {
   const contentCompiled = compileJsonToMDX(tag);
 
-  const file = new Blob([contentCompiled], {
+  const file = new Blob([fileSettings.frontMatter + contentCompiled], {
     type: "text/plain;charset=utf-8",
   });
 
-  saveAs(file, `${fileName}.${fileExtension}`);
+  saveAs(file, `${fileSettings.name}.${fileExtension}`);
 }

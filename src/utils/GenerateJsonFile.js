@@ -1,9 +1,17 @@
 import { saveAs } from "file-saver";
 
-export default function generateJsonFile(content, fileName) {
-  const file = new Blob([JSON.stringify(content)], {
+export default function generateJsonFile(content, fileSettings) {
+  const createdJson = {
+    pageSettings: {
+      name: fileSettings.name,
+      frontMatter: fileSettings.frontMatter,
+    },
+    pageContent: content,
+  };
+
+  const file = new Blob([JSON.stringify(createdJson)], {
     type: "application/json",
   });
-  console.log(file);
-  saveAs(file, `${fileName}.json`);
+
+  saveAs(file, `${fileSettings.name}.json`);
 }

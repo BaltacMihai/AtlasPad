@@ -1,6 +1,6 @@
 <template>
   <div class="content-page">
-    <h1>Page Title</h1>
+    <h1>{{ pageName }}</h1>
     <div class="tag-builder">
       <TagBuilder :tag="contentJson" />
     </div>
@@ -13,6 +13,7 @@ import TagBuilder from "./TagsTreeBuilder.vue";
 export default {
   props: {
     contentJson: Object,
+    pageName: String,
   },
   components: {
     TagBuilder,
