@@ -1,11 +1,8 @@
 import { saveAs } from "file-saver";
 
-export default function generateJsonFile(content, fileSettings) {
+export default function generateJsonFile(fileSettings, content) {
   const createdJson = {
-    pageSettings: {
-      name: fileSettings.name,
-      frontMatter: fileSettings.frontMatter,
-    },
+    pageSettings: fileSettings,
     pageContent: content,
   };
 
@@ -13,5 +10,5 @@ export default function generateJsonFile(content, fileSettings) {
     type: "application/json",
   });
 
-  saveAs(file, `${fileSettings.name}.json`);
+  saveAs(file, `${fileSettings.fileName}.json`);
 }

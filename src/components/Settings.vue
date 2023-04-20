@@ -71,6 +71,11 @@
           />
         </template>
       </div>
+
+      <div class="form__actions">
+        <div class="btn" @click="saveFile">Save</div>
+        <div class="btn" @click="exportFile">Export</div>
+      </div>
     </div>
   </template>
   <template v-else>
@@ -88,6 +93,8 @@ import { defineAsyncComponent } from "vue";
 import TextInput from "./partials/Inputs/TextInput.vue";
 import htmlDefaultTemplate from "@/utils/FileSettingsTemplate/HTML.json";
 import mdxDefaultTemplate from "@/utils/FileSettingsTemplate/MDX.json";
+import generateJsonFile from "@/utils/GenerateJsonFile";
+import exportMdxFile from "@/utils/ExportFile/ExportMdx";
 
 export default {
   props: {
@@ -140,6 +147,12 @@ export default {
         default:
           this.pageSettings.additionalInfo = null;
       }
+    },
+    saveFile() {
+      generateJsonFile(this.pageSettings, this.pageContent);
+    },
+    exportFile() {
+      exportMdxFile(this.pageSettings, this.pageContent);
     },
   },
   components: { TextInput },
@@ -289,6 +302,34 @@ export default {
         .disclaimer {
           display: flex;
         }
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    padding: 1rem;
+    width: 100%;
+    gap: 1rem;
+
+    position: absolute;
+    bottom: 0;
+    .btn {
+      border: 1px solid #f2f2f2;
+      padding: 1rem;
+      border-radius: 5px;
+      color: #f2f2f2;
+      text-align: center;
+
+      flex: 0 0 calc(30% - 4rem);
+
+      &:nth-child(2) {
+        flex: 0 0 calc(70% - 3.25rem);
+      }
+
+      &:hover {
+        opacity: 0.75;
+        cursor: pointer;
       }
     }
   }
