@@ -95,6 +95,7 @@ import htmlDefaultTemplate from "@/utils/FileSettingsTemplate/HTML.json";
 import mdxDefaultTemplate from "@/utils/FileSettingsTemplate/MDX.json";
 import generateJsonFile from "@/utils/GenerateJsonFile";
 import exportMdxFile from "@/utils/ExportFile/ExportMdx";
+import exportHtmlFile from "@/utils/ExportFile/ExportHTML";
 
 export default {
   props: {
@@ -152,7 +153,17 @@ export default {
       generateJsonFile(this.pageSettings, this.pageContent);
     },
     exportFile() {
-      exportMdxFile(this.pageSettings, this.pageContent);
+      switch (this.pageSettings.fileType) {
+        case "html":
+          exportHtmlFile(this.pageSettings, this.pageContent);
+          break;
+
+        case "mdx":
+          exportMdxFile(this.pageSettings, this.pageContent);
+          break;
+        default:
+          generateJsonFile(this.pageSettings, this.pageContent);
+      }
     },
   },
   components: { TextInput },
