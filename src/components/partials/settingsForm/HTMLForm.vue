@@ -1,28 +1,11 @@
 <template>
   <div class="form__page__mdx">
-    <!-- <div class="input__group">
-      <label for="title">Title</label>
-      <div class="input__radio" @click="changeTitleDefault">
-        <div class="circle" :class="{ selected: isTitleDefault }"></div>
-        <p class="text">Same as File</p>
-      </div>
-      <div class="input__radio">
-        <div
-          class="circle"
-          :class="{ selected: !isTitleDefault }"
-          @click="changeTitleDefault"
-        ></div>
-        <p class="text" @click="changeTitleDefault">Custom</p>
-        <template v-if="!isTitleDefault">
-          <input type="text" id="title" name="title" />
-        </template>
-      </div>
-    </div> -->
     <RadioInput
       label-name="Title"
       input-for="title"
       :options-text="['Same as file', 'Custom']"
       :value="additionalInfo"
+      placeholder="HTML's page name"
     />
 
     <div class="internal__tabs">
@@ -44,19 +27,93 @@
     </div>
 
     <div class="internal__tabs__content">
-      <template v-if="activeTab == 'meta'"> </template>
+      <template v-if="activeTab == 'meta'">
+        <RadioInput
+          label-name="Charset"
+          input-for="charset"
+          :options-text="['None', 'Custom']"
+          :value="additionalInfo.meta"
+          placeholder="UTF-8"
+        />
+        <RadioInput
+          label-name="Keywords"
+          input-for="keywords"
+          :options-text="['None', 'Custom']"
+          :value="additionalInfo.meta"
+          placeholder="HTML, CSS, JavaScript"
+        />
+        <RadioInput
+          label-name="Description"
+          input-for="description"
+          :options-text="['None', 'Custom']"
+          :value="additionalInfo.meta"
+          placeholder="Generated with MDX Builder"
+        />
+        <RadioInput
+          label-name="Author"
+          input-for="author"
+          :options-text="['None', 'Custom']"
+          :value="additionalInfo.meta"
+          placeholder="Baltac Mihai"
+        />
+
+        <RadioInput
+          label-name="Viewport"
+          input-for="viewport"
+          :options-text="['Default', 'Custom']"
+          :value="additionalInfo.meta"
+          placeholder="width=device-width, initial-scale=1.0"
+        />
+      </template>
+      <template v-else-if="activeTab == 'styles'">
+        <TextareaInput
+          labelName="Imports"
+          inputFor="imports"
+          :value="additionalInfo.style"
+          placeholder="<link rel='stylesheet' href='mystyle.css'>"
+        />
+        <TextareaInput
+          labelName="Custom"
+          inputFor="custom"
+          :value="additionalInfo.style"
+          placeholder="body { &#10; &nbsp; background-color: linen; &#10; &nbsp; } &#10; &#10; h1 { &#10; &nbsp; color: maroon; &#10; &nbsp; margin-left: 40px; &#10; &nbsp; }"
+          initialHeight="10"
+        />
+      </template>
+      <template v-else-if="activeTab == 'scripts'">
+        <TextareaInput
+          labelName="Head Imports"
+          inputFor="headImports"
+          :value="additionalInfo.script"
+          placeholder="<script src='myScript.js'></script>"
+        />
+        <TextareaInput
+          labelName="Body Imports"
+          inputFor="bodyImports"
+          :value="additionalInfo.script"
+          placeholder="<script src='myScript.js'></script>"
+        />
+        <TextareaInput
+          labelName="Custom"
+          inputFor="custom"
+          :value="additionalInfo.script"
+          placeholder="document.getElementById('demo').innerHTML = 'Hello JavaScript!'';"
+        />
+      </template>
     </div>
   </div>
 </template>
 
 <script>
-import RadioInput from "../Inputs/_RadioInput.vue";
+import RadioInput from "../Inputs/RadioInput.vue";
+import TextareaInput from "../Inputs/TextareaInput.vue";
 export default {
   props: {
     additionalInfo: Object,
   },
   components: {
     RadioInput,
+    TextareaInput,
   },
   data() {
     return {
@@ -74,11 +131,6 @@ export default {
       this.activeTab = tabName;
     },
   },
-  watch: {
-    title(newVal, oldVal) {
-      console.log(newVal);
-    },
-  },
 };
 </script>
 
@@ -88,72 +140,17 @@ export default {
   flex-direction: column;
   gap: 1.5rem;
 
-  .input__group {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-
-    label {
-      color: #f2f2f2;
-      font-size: 1rem;
-      letter-spacing: 1px;
-    }
-    .input__radio {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-
-      &:hover {
-        cursor: pointer;
-      }
-
-      .circle {
-        $standard-size: 1rem;
-        $outline-size: 1px;
-        $border-size: 3px;
-
-        $calculated-size: calc($standard-size + $border-size - $outline-size);
-
-        width: $calculated-size;
-        height: $calculated-size;
-        border-radius: $calculated-size;
-        outline: $outline-size solid #f2f2f2;
-
-        &.selected {
-          $calculated-size: calc($standard-size - $outline-size - $border-size);
-          width: $calculated-size;
-          height: $calculated-size;
-          background-color: #f2f2f2;
-          border: $border-size solid #2c2c2c;
-        }
-      }
-      .text {
-        color: #f2f2f2;
-      }
-
-      input,
-      select {
-        background-color: #f2f2f2;
-        border: none;
-        border-radius: 5px;
-        font-size: 1rem;
-        padding: 0.5rem;
-        flex: 0 0 calc(100% - 1rem);
-
-        &:is(:hover, :focus, :focus-visible) {
-          border: none;
-          outline: none;
-        }
-      }
-    }
-  }
-
   .internal__tabs {
     display: flex;
     border-bottom: 1px solid #444444;
     margin-left: -1rem;
     width: calc(100% + 2rem);
+
+    &__content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
 
     p {
       padding: 1rem;

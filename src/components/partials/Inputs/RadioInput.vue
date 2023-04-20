@@ -20,6 +20,7 @@
           :id="localId"
           :name="localId"
           v-model="value[inputFor]"
+          :placeholder="placeholder"
         />
       </template>
     </div>
@@ -34,6 +35,7 @@ export default {
     inputFor: String,
     optionsText: Array,
     value: Object,
+    placeholder: String,
   },
   data() {
     return {
@@ -58,64 +60,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.input__group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-
-  label {
-    color: #f2f2f2;
-    font-size: 1rem;
-    letter-spacing: 1px;
-  }
-  .input__radio {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-
-    &:hover {
-      cursor: pointer;
-    }
-
-    .circle {
-      $standard-size: 1rem;
-      $outline-size: 1px;
-      $border-size: 3px;
-
-      $calculated-size: calc($standard-size + $border-size - $outline-size);
-
-      width: $calculated-size;
-      height: $calculated-size;
-      border-radius: $calculated-size;
-      outline: $outline-size solid #f2f2f2;
-
-      &.selected {
-        $calculated-size: calc($standard-size - $outline-size - $border-size);
-        width: $calculated-size;
-        height: $calculated-size;
-        background-color: #f2f2f2;
-        border: $border-size solid #2c2c2c;
-      }
-    }
-    .text {
-      color: #f2f2f2;
-    }
-
-    input,
-    select {
-      background-color: #f2f2f2;
-      border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-      padding: 0.5rem;
-      flex: 0 0 calc(100% - 1rem);
-
-      &:is(:hover, :focus, :focus-visible) {
-        border: none;
-        outline: none;
-      }
-    }
-  }
-}
+@use "@/assets/scss";
 </style>

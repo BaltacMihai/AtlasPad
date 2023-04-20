@@ -30,7 +30,7 @@
 
       <div class="form__content">
         <template v-if="selectedTab == 'file'">
-          <div class="input__group">
+          <!-- <div class="input__group">
             <label for="name">Name</label>
             <input
               type="text"
@@ -39,7 +39,13 @@
               v-model="pageSettings.fileName"
               placeholder="Page's name"
             />
-          </div>
+          </div> -->
+          <TextInput
+            label-name="Name"
+            inputFor="fileName"
+            placeholder="Page's name"
+            :value="pageSettings"
+          />
           <div class="input__group">
             <label for="type">Format</label>
             <select
@@ -79,6 +85,9 @@
 
 <script>
 import { defineAsyncComponent } from "vue";
+import TextInput from "./partials/Inputs/TextInput.vue";
+import htmlDefaultTemplate from "@/utils/FileSettingsTemplate/HTML.json";
+import mdxDefaultTemplate from "@/utils/FileSettingsTemplate/MDX.json";
 
 export default {
   props: {
@@ -119,35 +128,21 @@ export default {
     },
     changeTypeOfFile(event) {
       this.pageSettings.fileType = event.target.value;
-
       // builds the default additionalInfo
-
       switch (this.pageSettings.fileType) {
         case "html":
-          this.pageSettings.additionalInfo = {
-            title: null,
-            meta: {
-              charset: null,
-              keywords: null,
-              description: null,
-              author: null,
-              refresh: null,
-              viewport: null,
-            },
-            style: {
-              imports: "",
-            },
-            script: {
-              headImports: "",
-              bodyImports: "",
-            },
-          };
+          this.pageSettings.additionalInfo = htmlDefaultTemplate;
+          break;
+
+        case "mdx":
+          this.pageSettings.additionalInfo = mdxDefaultTemplate;
           break;
         default:
           this.pageSettings.additionalInfo = null;
       }
     },
   },
+  components: { TextInput },
 };
 </script>
 
@@ -276,7 +271,6 @@ export default {
           outline: none;
         }
       }
-
       .disclaimer {
         color: #f2f2f2;
         font-size: 0.9rem;

@@ -2,6 +2,8 @@
 import exampleTest from "./utils/Example.json";
 import TagsTree from "./components/TagsTree.vue";
 import Settings from "./components/Settings.vue";
+import mdxDefaultTemplate from "@/utils/FileSettingsTemplate/MDX.json";
+
 export default {
   components: {
     TagsTree,
@@ -12,8 +14,8 @@ export default {
       exampleTest,
       pageSettings: {
         fileName: "New Page",
-        fileType: "html",
-        additionalInfo: {},
+        fileType: "mdx",
+        additionalInfo: mdxDefaultTemplate,
       },
     };
   },

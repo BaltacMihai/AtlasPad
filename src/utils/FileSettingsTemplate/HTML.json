@@ -1,0 +1,19 @@
+{
+  "title": null,
+  "meta": {
+    "charset": null,
+    "keywords": null,
+    "description": null,
+    "author": null,
+    "viewport": null
+  },
+  "style": {
+    "imports": "",
+    "custom": ""
+  },
+  "script": {
+    "headImports": "",
+    "bodyImports": "",
+    "custom": ""
+  }
+}

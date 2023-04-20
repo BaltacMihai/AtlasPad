@@ -1,36 +1,39 @@
 <template>
   <div class="form__page__mdx">
-    <div class="input__group">
-      <label for="frontmatter">Front Matter</label>
-      <textarea
-        type="text"
-        id="frontmatter"
-        name="frontmatter"
-        placeholder="Frontmatter of the app"
-      />
-    </div>
-    <div class="input__group">
-      <label for="imports">Imports</label>
-      <textarea
-        type="text"
-        id="imports"
-        name="imports"
-        placeholder="Place to insert your imports"
-      />
-    </div>
-    <div class="input__group">
-      <label for="varAndComp">Variabels & Components</label>
-      <textarea
-        type="text"
-        id="varAndComp"
-        name="varAndComp"
-        placeholder="Place to insert your declaration of Variabels and Components"
-      />
-    </div>
+    <TextareaInput
+      labelName="Front Matter"
+      inputFor="frontMatter"
+      :value="additionalInfo"
+      placeholder="--- &#10; title: Frontmatter section &#10; ---"
+      initialHeight="4"
+    />
+    <TextareaInput
+      labelName="Imports"
+      inputFor="imports"
+      :value="additionalInfo"
+      placeholder="import {Generator} from './mdxGenerator.js'"
+    />
+    <TextareaInput
+      labelName="Variables & Components"
+      inputFor="variables"
+      :value="additionalInfo"
+      placeholder="export const name = 'Baltac Mihai'"
+    />
   </div>
 </template>
 
-<script></script>
+<script>
+import TextareaInput from "../Inputs/TextareaInput.vue";
+
+export default {
+  props: {
+    additionalInfo: Object,
+  },
+  components: {
+    TextareaInput,
+  },
+};
+</script>
 
 <style lang="scss">
 .form__page__mdx {

@@ -1,0 +1,112 @@
+$standard-size: 1rem;
+$outline-size: 1px;
+$border-size: 3px;
+$letter-spacing-size: 1px;
+
+$gap: calc($standard-size / 2);
+$fs-text: $standard-size;
+
+$cl-white: #f2f2f2;
+$cl-black: #2c2c2c;
+
+.input__group {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+
+  label {
+    color: $cl-white;
+    font-size: $fs-text;
+    letter-spacing: $letter-spacing-size;
+  }
+  .input__radio {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: $gap;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    .circle {
+      $calculated-size: calc($standard-size + $border-size - $outline-size);
+
+      width: $calculated-size;
+      height: $calculated-size;
+      border-radius: $calculated-size;
+      outline: $outline-size solid $cl-white;
+
+      &.selected {
+        $calculated-size: calc($standard-size - $outline-size - $border-size);
+        width: $calculated-size;
+        height: $calculated-size;
+        background-color: $cl-white;
+        border: $border-size solid $cl-black;
+      }
+    }
+    .text {
+      color: $cl-white;
+    }
+
+    input,
+    select {
+      background-color: $cl-white;
+      border: none;
+      border-radius: 5px;
+      font-size: $fs-text;
+      padding: $gap;
+      flex: 0 0 calc(100% - $standard-size);
+
+      &:is(:hover, :focus, :focus-visible) {
+        border: none;
+        outline: none;
+      }
+    }
+  }
+  input,
+  select {
+    background-color: $cl-white;
+    border: none;
+    border-radius: 5px;
+    font-size: $fs-text;
+    padding: $gap;
+
+    &:is(:hover, :focus, :focus-visible) {
+      border: none;
+      outline: none;
+    }
+  }
+  textarea {
+    background-color: #f2f2f2;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    padding: 0.5rem;
+    resize: vertical;
+
+    &:is(:hover, :focus, :focus-visible) {
+      border: none;
+      outline: none;
+    }
+  }
+  .disclaimer {
+    color: $cl-white;
+    font-size: calc($fs-text - 0.1rem);
+    letter-spacing: 0.5px;
+    padding-left: 1rem;
+
+    display: none;
+    align-items: center;
+    gap: calc($gap / 2);
+
+    img {
+      width: 20px;
+    }
+  }
+  &:hover {
+    .disclaimer {
+      display: flex;
+    }
+  }
+}
