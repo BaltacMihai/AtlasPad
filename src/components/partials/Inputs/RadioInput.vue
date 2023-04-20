@@ -11,7 +11,7 @@
       <div
         class="circle"
         :class="{ selected: !isDefault }"
-        @click="changeTitleDefault"
+        @click="changeOption"
       ></div>
       <p class="text" @click="changeOption">{{ optionsText[1] }}</p>
       <template v-if="!isDefault">
