@@ -1,18 +1,19 @@
 <script>
 import exampleTest from "./utils/Example.json";
 import TagsTree from "./components/TagsTree.vue";
-import Form from "./components/Form.vue";
+import Settings from "./components/Settings.vue";
 export default {
   components: {
     TagsTree,
-    Form,
+    Settings,
   },
   data() {
     return {
       exampleTest,
       pageSettings: {
-        name: "New Page",
-        frontMatter: "",
+        fileName: "New Page",
+        fileType: "html",
+        additionalInfo: {},
       },
     };
   },
@@ -21,8 +22,8 @@ export default {
 
 <template>
   <div class="content">
-    <TagsTree :contentJson="exampleTest" :pageName="pageSettings.name" />
-    <Form :pageSettings="pageSettings" :pageContent="exampleTest" />
+    <TagsTree :contentJson="exampleTest" :pageName="pageSettings.fileName" />
+    <Settings :pageSettings="pageSettings" :pageContent="exampleTest" />
   </div>
 </template>
 
@@ -34,12 +35,11 @@ export default {
   font-family: "Open Sans", sans-serif;
 }
 body {
-  background-color: #fcfbfc;
+  background-color: #f2f2f2;
 }
 
 .content {
   display: flex;
   width: 100%;
-  overflow: hidden;
 }
 </style>

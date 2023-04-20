@@ -1,6 +1,6 @@
 <template>
   <div class="tag-container">
-    <template v-for="tagChild in tag.content">
+    <template v-for="(tagChild, index) in tag.content" :key="index">
       <DynamicTag :tag="tagChild" @delete="deleteTag" />
     </template>
     <img class="addItem" @click="addElement" src="@/assets/icons/additem.svg" />

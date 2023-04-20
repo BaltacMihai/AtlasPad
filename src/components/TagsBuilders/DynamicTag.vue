@@ -3,6 +3,7 @@
     <p class="tag-title">{{ tag.tagName }}</p>
     <component :is="componentName" :tag="tag" @delete="deleteTag" />
     <img @click="onDelete" src="@/assets/icons/trash.svg" class="deleteIcon" />
+    <!-- <button @click="clickItem">Show</button> -->
   </div>
 </template>
 
@@ -35,6 +36,10 @@ export default {
       if (index !== -1) {
         this.tag.content.splice(index, 1);
       }
+    },
+    clickItem() {
+      console.log(this.tag);
+      return 0;
     },
   },
 };
