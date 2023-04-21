@@ -24,8 +24,8 @@ export default {
 
 <template>
   <div class="content">
-    <TagsTree :contentJson="exampleTest" :pageName="pageSettings.fileName" />
     <Settings :pageSettings="pageSettings" :pageContent="exampleTest" />
+    <TagsTree :contentJson="exampleTest" :pageName="pageSettings.fileName" />
   </div>
 </template>
 
@@ -40,8 +40,7 @@ body {
   background-color: #f2f2f2;
 }
 
-.content {
-  display: flex;
-  width: 100%;
+.form ~ .content-page {
+  width: 80%;
 }
 </style>

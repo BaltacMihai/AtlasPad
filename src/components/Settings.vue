@@ -176,16 +176,17 @@ export default {
   top: 2.25rem;
   right: 2rem;
   width: 25px;
+  z-index: 99999;
   &:hover {
     cursor: pointer;
   }
 }
 
 .form {
-  flex: 0 0 20%;
   height: calc(100% - 2rem);
   position: fixed;
   right: 0%;
+  top: 0;
   margin: 1rem;
   background-color: #2c2c2c;
   width: 20%;
