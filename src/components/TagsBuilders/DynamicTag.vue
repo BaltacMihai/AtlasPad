@@ -1,21 +1,125 @@
 <template>
-  <div class="tag">
-    <p class="tag-title">{{ tag.tagName }}</p>
-    <component :is="componentName" :tag="tag" @delete="deleteTag" />
-    <img @click="onDelete" src="@/assets/icons/trash.svg" class="deleteIcon" />
-    <!-- <button @click="clickItem">Show</button> -->
+  <div class="tag" :class="{ minimized: isMinimized }">
+    <div class="tag__header">
+      <div class="tag__header__name">
+        <img :src="generateTagIcon" alt="containerIcon" />
+        <p class="tag-title">
+          {{ tag.tagName.charAt(0).toUpperCase() + tag.tagName.slice(1) }}
+        </p>
+      </div>
+      <div class="tag__header__actions">
+        <img
+          :src="expandCollapseIcon"
+          class="expandIcon"
+          @click="collapseElement"
+        />
+
+        <img
+          src="@/assets/icons/settings.svg"
+          class="settingsIcon"
+          @click="openSettings"
+        />
+        <img
+          @click="onDelete"
+          src="@/assets/icons/trash.svg"
+          class="deleteIcon"
+        />
+      </div>
+    </div>
+    <div class="tag__settings" :class="{ minimized: !isTagSettingsOpened }">
+      <div class="tag__settings__tabs">
+        <p
+          :class="{ active: currentTab == 'settings' }"
+          @click="changeTab('settings')"
+        >
+          Settings
+        </p>
+        <p
+          :class="{ active: currentTab == 'attributes' }"
+          @click="changeTab('attributes')"
+        >
+          Attributes
+        </p>
+      </div>
+      <div class="tag__settings__content">
+        <template v-if="currentTab == 'settings'">
+          <SimpleRadioInput
+            label-name="Custom Tag"
+            :options-text="['No', 'Yes']"
+            :value="isCustomTag"
+            :change="handleIsCustomTag"
+            class="inverse"
+          />
+
+          <template v-if="isCustomTag">
+            <TextInput
+              label-name="Name"
+              inputFor="tagName"
+              placehodler="Tag's name"
+              :value="tag"
+              class="inverse"
+            />
+            <div class="input__group inverse">
+              <label for="type">Type</label>
+              <select
+                name="type"
+                id="type"
+                @change="changeTypeOfFile"
+                v-model="tag.tagType"
+              >
+                <template v-for="tagType in defaultTypeTags">
+                  <option :value="tagType">{{ tagType }}</option>
+                </template>
+              </select>
+            </div>
+          </template>
+          <template v-else>
+            <div class="input__group inverse">
+              <label for="type">Name</label>
+              <select
+                name="type"
+                id="type"
+                v-model="tag.tagName"
+                @change="changeDefaultType"
+              >
+                <template v-for="tagName in defaultTagsName">
+                  <option :value="tagName">{{ tagName }}</option>
+                </template>
+              </select>
+            </div>
+          </template>
+        </template>
+        <template v-else-if="currentTab == 'attributes'"> attributes </template>
+      </div>
+    </div>
+    <div class="tag__container">
+      <component :is="childTag" :tag="tag" @delete="deleteTag" />
+    </div>
   </div>
 </template>
 
 <script>
 import { defineAsyncComponent } from "vue";
+import SimpleRadioInput from "@/components/partials/Inputs/SimpleRadioInput.vue";
+import TextInput from "@/components/partials/Inputs/TextInput.vue";
+import defaultTags from "@/utils/DefaultTags/HTMLTags.json";
+import defaultTypeTags from "@/utils/DefaultTags/TypeTags.json";
+
 export default {
   props: {
     tag: Object,
   },
+  data() {
+    return {
+      isMinimized: false,
+      isTagSettingsOpened: false,
+      currentTab: "settings",
+      isCustomTag: false,
+    };
+  },
 
   computed: {
-    componentName() {
+    childTag() {
       switch (this.tag.tagType) {
         case "selfClose":
           return defineAsyncComponent(() => import("./_SingleTag.vue"));
@@ -25,63 +129,178 @@ export default {
           return defineAsyncComponent(() => import("./_ContainerTag.vue"));
       }
     },
+    generateTagIcon() {
+      if (this.isCustomTag) return "src/assets/icons/tags/" + "custom.svg";
+      const type = this.tag.tagType;
+      const typeObject = defaultTypeTags.types.find((t) => t.name === type);
+      if (typeObject) {
+        return "src/assets/icons/tags/" + typeObject.icon;
+      } else {
+        return "src/assets/icons/tags/" + "default.svg";
+      }
+    },
+
+    expandCollapseIcon() {
+      return this.isMinimized
+        ? "src/assets/icons/expand.svg"
+        : "src/assets/icons/shrink.svg";
+    },
+    defaultTagsName() {
+      const tagNames = [];
+      defaultTags.tags.forEach((tag) => {
+        tagNames.push(tag.name);
+      });
+      return tagNames;
+    },
+    defaultTypeTags() {
+      const tagTypes = [];
+      defaultTypeTags.types.forEach((type) => {
+        tagTypes.push(type.name);
+      });
+      return tagTypes;
+    },
   },
   methods: {
+    handleIsCustomTag(value) {
+      this.isCustomTag = value;
+    },
+    changeDefaultType() {
+      const name = this.tag.tagName;
+      const nameObject = defaultTags.tags.find((t) => t.name === name);
+      if (nameObject) {
+        console.log(nameObject);
+        this.tag.tagType = nameObject.type;
+      }
+    },
+
     onDelete() {
       this.$emit("delete", this.tag);
     },
     deleteTag(tag) {
-      console.log(tag);
       const index = this.tag.content.indexOf(tag);
       if (index !== -1) {
         this.tag.content.splice(index, 1);
       }
     },
-    clickItem() {
-      console.log(this.tag);
-      return 0;
+
+    collapseElement() {
+      this.isMinimized = !this.isMinimized;
+      this.isTagSettingsOpened = !this.isTagSettingsOpened;
     },
+    openSettings() {
+      this.isTagSettingsOpened = !this.isTagSettingsOpened;
+    },
+    changeTab(tabName) {
+      this.currentTab = tabName;
+    },
+  },
+  components: {
+    SimpleRadioInput,
+    TextInput,
   },
 };
 </script>
 
 <style lang="scss" scoped>
+@use "@/assets/scss";
 .tag {
-  padding: 1.5rem;
-  border: 1px solid #ded7fb;
+  border: 1px solid #2c2c2c;
   border-radius: 10px;
-  position: relative;
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
 
-  .tag-title {
-    position: absolute;
-    top: -1rem;
-    left: 1rem;
-    background: #fcfbfc;
-    padding: 0 10px;
-    color: #5d60ef;
-    font-weight: bold;
+  &__header {
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+
+    background-color: #2c2c2c;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+
+    &__name {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      p {
+        color: #f2f2f2;
+      }
+    }
+
+    &__actions {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+
+      img {
+        width: 25px;
+
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
   }
-
-  .deleteIcon {
-    display: none;
-    width: 20px;
-    position: absolute;
-    top: -0.75rem;
-    right: 1rem;
-    background: #fcfbfc;
-    padding: 0 0.5rem;
-
-    &:hover {
-      cursor: pointer;
+  &:hover {
+    & .tag__header__actions {
+      opacity: 1;
     }
   }
 
-  &:hover {
-    & > .deleteIcon:last-child {
-      display: block;
+  &__settings {
+    border-bottom: 1px solid #2c2c2c;
+    flex-direction: column;
+    &.minimized {
+      display: none;
+    }
+    display: flex;
+
+    &__tabs {
+      display: flex;
+      border-bottom: 1px solid #dadada;
+      padding: 0 1rem;
+      gap: 1rem;
+
+      p {
+        padding: 1rem 0;
+        font-size: 1.1rem;
+        letter-spacing: 1px;
+        &.active {
+          border-bottom: 2px solid #dadada;
+          font-weight: bold;
+
+          &:not(.active) {
+            color: #bfbfbf;
+          }
+        }
+        &:hover {
+          cursor: pointer;
+          opacity: 0.75;
+        }
+      }
+    }
+    &__content {
+      padding: 1rem;
+      display: flex;
+      gap: 2.5rem;
+    }
+  }
+
+  &__container {
+    padding: 1rem;
+  }
+
+  &.minimized {
+    .tag__header {
+      border-radius: 10px;
+    }
+    .tag__settings {
+      display: none;
+    }
+    .tag__container {
+      display: none;
     }
   }
 }

@@ -1,0 +1,76 @@
+{
+  "tags": [
+    {
+      "name": "img",
+      "type": "media"
+    },
+    {
+      "name": "h1",
+      "type": "text"
+    },
+    {
+      "name": "h2",
+      "type": "text"
+    },
+    {
+      "name": "h3",
+      "type": "text"
+    },
+    {
+      "name": "h4",
+      "type": "text"
+    },
+    {
+      "name": "h5",
+      "type": "text"
+    },
+    {
+      "name": "h6",
+      "type": "text"
+    },
+    {
+      "name": "p",
+      "type": "text"
+    },
+    {
+      "name": "i",
+      "type": "text"
+    },
+    {
+      "name": "b",
+      "type": "text"
+    },
+    {
+      "name": "a",
+      "type": "link"
+    },
+    {
+      "name": "div",
+      "type": "container"
+    },
+    {
+      "name": "section",
+      "type": "container"
+    },
+    {
+      "name": "nav",
+      "type": "container"
+    },
+    {
+      "name": "main",
+      "type": "container"
+    },
+    {
+      "name": "footer",
+      "type": "container"
+    },
+    {
+      "name": "br",
+      "type": "singleTag"
+    },
+    {
+      "name": "hr",
+      "type": "singleTag"
+    }
+  ]
+}

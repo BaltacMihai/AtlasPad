@@ -3,7 +3,10 @@
     <template v-for="(tagChild, index) in tag.content" :key="index">
       <DynamicTag :tag="tagChild" @delete="deleteTag" />
     </template>
-    <img class="addItem" @click="addElement" src="@/assets/icons/additem.svg" />
+    <div class="btn" @click="addElement">
+      <img class="addItem" src="@/assets/icons/additem.svg" />
+      <p>Add New Tag</p>
+    </div>
   </div>
 </template>
 
@@ -49,9 +52,20 @@ export default {
   gap: 2rem;
 }
 
-.addItem {
-  width: 25px;
-  margin: 0 auto;
+.btn {
+  background: #2c2c2c;
+  width: fit-content;
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  border-radius: 10px;
+  img {
+    width: 25px;
+    margin: 0 auto;
+  }
+  p {
+    color: #f2f2f2;
+  }
   &:hover {
     cursor: pointer;
   }

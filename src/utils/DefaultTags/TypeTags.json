@@ -1,0 +1,24 @@
+{
+  "types": [
+    {
+      "name": "media",
+      "icon": "media.svg"
+    },
+    {
+      "name": "text",
+      "icon": "text.svg"
+    },
+    {
+      "name": "link",
+      "icon": "link.svg"
+    },
+    {
+      "name": "container",
+      "icon": "container.svg"
+    },
+    {
+      "name": "singleTag",
+      "icon": "closingTag.svg"
+    }
+  ]
+}
