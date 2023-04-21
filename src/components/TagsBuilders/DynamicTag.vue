@@ -170,6 +170,12 @@ export default {
           return defineAsyncComponent(() => import("./_SingleTag.vue"));
         case "text":
           return defineAsyncComponent(() => import("./_ContentTag.vue"));
+        case "link":
+          return defineAsyncComponent(() => import("./_ContentTag.vue"));
+
+        case "media":
+          return defineAsyncComponent(() => import("./_ImgTag.vue"));
+
         case "container":
           return defineAsyncComponent(() => import("./_ContainerTag.vue"));
       }
