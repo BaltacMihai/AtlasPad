@@ -5,7 +5,7 @@ name: Deploy static content to Pages
 on:
   # Runs on pushes targeting the default branch
   push:
-    branches: ['main']
+    branches: ["main"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -18,7 +18,7 @@ permissions:
 
 # Allow one concurrent deployment
 concurrency:
-  group: 'pages'
+  group: "pages"
   cancel-in-progress: true
 
 jobs:
@@ -35,7 +35,7 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18
-          cache: 'npm'
+          cache: "npm"
       - name: Install dependencies
         run: npm install
       - name: Build
@@ -46,12 +46,12 @@ jobs:
         uses: actions/upload-pages-artifact@v1
         with:
           # Upload dist repository
-          path: './dist'
+          path: "./dist"
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
 
- create-file:
+  create-file:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -60,14 +60,14 @@ jobs:
       - name: Create log file
         run: |
           git log --pretty=format:"%h %s" > commit-log.txt
-          
+
       - name: Commit log file
         run: |
           git config --global user.email "baltacmihaicristian@gmail.com"
           git config --global user.name "BaltacMihai"
           git add commit-log.txt
           git commit -m "Add commit log file"
-          
+
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
