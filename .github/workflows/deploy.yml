@@ -49,3 +49,24 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
+ create-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Create log file
+        run: |
+          git log --pretty=format:"%h %s" > commit-log.txt
+          
+      - name: Commit log file
+        run: |
+          git config --global user.email "baltacmihaicristian@gmail.com"
+          git config --global user.name "BaltacMihai"
+          git add commit-log.txt
+          git commit -m "Add commit log file"
+          
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.COMMITS_TOKEN }}
