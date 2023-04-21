@@ -3,27 +3,27 @@ export default function generateTags(tag, depth = 0) {
 
   switch (tag.tagType) {
     case "selfClose":
-      return `${indent}<${tag.tagName} ${generateTagAttributesString(
+      return `${indent}<${tag.tagName}${generateTagAttributesString(
         tag.tagAttributes
       )}/>\n`;
 
     case "text":
-      return `${indent}<${tag.tagName} ${generateTagAttributesString(
+      return `${indent}<${tag.tagName}${generateTagAttributesString(
         tag.tagAttributes
       )}> ${tag.content}</${tag.tagName}>\n`;
 
     case "media":
-      return `${indent}<${tag.tagName} ${generateTagAttributesString(
+      return `${indent}<${tag.tagName}${generateTagAttributesString(
         tag.tagAttributes
       )}> ${tag.content}</${tag.tagName}>\n`;
 
     case "link":
-      return `${indent}<${tag.tagName} ${generateTagAttributesString(
+      return `${indent}<${tag.tagName}${generateTagAttributesString(
         tag.tagAttributes
       )}> ${tag.content}</${tag.tagName}>\n`;
 
     case "container":
-      return `${indent}<${tag.tagName} ${generateTagAttributesString(
+      return `${indent}<${tag.tagName}${generateTagAttributesString(
         tag.tagAttributes
       )}> \n${tag.content
         ?.map((tagChild) => generateTags(tagChild, depth + 2))
@@ -41,5 +41,8 @@ function generateTagAttributesString(tagAttributes) {
   if (tagAttributes.custom) {
     tagAttributesList.push(tagAttributes.custom);
   }
-  return tagAttributesList.join(" ");
+
+  if (tagAttributesList.length != 0) {
+    return " " + tagAttributesList.join(" ");
+  } else return "";
 }
