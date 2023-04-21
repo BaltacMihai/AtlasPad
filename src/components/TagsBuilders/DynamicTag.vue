@@ -55,7 +55,7 @@
             <TextInput
               label-name="Name"
               inputFor="tagName"
-              placehodler="Tag's name"
+              placeholder="Tag's name"
               :value="tag"
               class="inverse"
             />
@@ -89,7 +89,47 @@
             </div>
           </template>
         </template>
-        <template v-else-if="currentTab == 'attributes'"> attributes </template>
+        <template v-else-if="currentTab == 'attributes'">
+          <TextInput
+            label-name="Id"
+            inputFor="id"
+            placeholder="Tag's id"
+            :value="tag.tagAttributes"
+            class="inverse"
+          />
+          <TextInput
+            label-name="Class"
+            inputFor="class"
+            placeholder="Tag's class"
+            :value="tag.tagAttributes"
+            class="inverse"
+          />
+          <template v-if="tag.tagType == 'link'">
+            <TextInput
+              label-name="Hyperlink"
+              inputFor="href"
+              placeholder="Tag's hyperlink"
+              :value="tag.tagAttributes"
+              class="inverse"
+            />
+          </template>
+          <template v-if="tag.tagType == 'media'">
+            <TextInput
+              label-name="Src"
+              inputFor="src"
+              placeholder="Tag's src"
+              :value="tag.tagAttributes"
+              class="inverse"
+            />
+          </template>
+          <TextInput
+            label-name="Custom"
+            inputFor="custom"
+            placeholder="Tag's custom attributes"
+            :value="tag.tagAttributes"
+            class="inverse"
+          />
+        </template>
       </div>
     </div>
     <div class="tag__container">
@@ -115,6 +155,11 @@ export default {
       isTagSettingsOpened: false,
       currentTab: "settings",
       isCustomTag: false,
+      attributes: {
+        id: "",
+        class: "",
+        custom: "",
+      },
     };
   },
 
@@ -194,6 +239,7 @@ export default {
       this.currentTab = tabName;
     },
   },
+
   components: {
     SimpleRadioInput,
     TextInput,
@@ -285,6 +331,7 @@ export default {
       padding: 1rem;
       display: flex;
       gap: 2.5rem;
+      flex-wrap: wrap;
     }
   }
 

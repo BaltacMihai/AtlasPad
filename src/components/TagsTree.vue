@@ -29,7 +29,11 @@ export default {
     addElement() {
       const newElement = {
         tagName: "section",
-        tagAttributes: "New Element Added",
+        tagAttributes: {
+          class: "",
+          id: "",
+          custom: "",
+        },
         tagType: "container",
         content: [],
       };
