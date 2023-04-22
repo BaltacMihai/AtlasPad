@@ -56,7 +56,7 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v3
-         with:
+        with:
           node-version: 18
 
       - name: Create Commits File
