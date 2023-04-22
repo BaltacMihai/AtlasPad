@@ -145,6 +145,18 @@ import TextInput from "@/components/partials/Inputs/TextInput.vue";
 import defaultTags from "@/utils/DefaultTags/HTMLTags.json";
 import defaultTypeTags from "@/utils/DefaultTags/TypeTags.json";
 
+//Import dynamical the icons
+import expandImgSrc from "@/assets/icons/expand.svg";
+import shrinkImgSrc from "@/assets/icons/shrink.svg";
+
+import defaultTagImgSrc from "@/assets/icons/tags/default.svg";
+import customTagImgSrc from "@/assets/icons/tags/custom.svg";
+import mediaTagImgSrc from "@/assets/icons/tags/media.svg";
+import textTagImgSrc from "@/assets/icons/tags/text.svg";
+import linkTagImgSrc from "@/assets/icons/tags/link.svg";
+import containerTagImgSrc from "@/assets/icons/tags/container.svg";
+import closingTagImgSrc from "@/assets/icons/tags/closingTag.svg";
+
 export default {
   props: {
     tag: Object,
@@ -181,20 +193,27 @@ export default {
       }
     },
     generateTagIcon() {
-      if (this.isCustomTag) return "src/assets/icons/tags/" + "custom.svg";
+      if (this.isCustomTag) return customTagImgSrc;
       const type = this.tag.tagType;
       const typeObject = defaultTypeTags.types.find((t) => t.name === type);
-      if (typeObject) {
-        return "src/assets/icons/tags/" + typeObject.icon;
-      } else {
-        return "src/assets/icons/tags/" + "default.svg";
+      switch (typeObject.name) {
+        case "media":
+          return mediaTagImgSrc;
+        case "text":
+          return textTagImgSrc;
+        case "link":
+          return linkTagImgSrc;
+        case "container":
+          return containerTagImgSrc;
+        case "singleTag":
+          return closingTagImgSrc;
+        default:
+          return defaultTagImgSrc;
       }
     },
 
     expandCollapseIcon() {
-      return this.isMinimized
-        ? "src/assets/icons/expand.svg"
-        : "src/assets/icons/shrink.svg";
+      return this.isMinimized ? expandImgSrc : shrinkImgSrc;
     },
     defaultTagsName() {
       const tagNames = [];
