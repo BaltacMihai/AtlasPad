@@ -61,7 +61,7 @@ jobs:
 
         - name: Create Commits File
           run: |
-            git log --format=%B | grep -E '^[A-Z]{2,}-[0-9]+' > commits.txt
+          git log --format=%B | grep -E '^[A-Z]{2,}-[0-9]+' > commits.txt
           git config --global user.email "baltacmihaicristian@gmail.com"
           git config --global user.name "BaltacMihai"
           git add commits.txt
