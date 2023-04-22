@@ -54,7 +54,7 @@ jobs:
           git config --global user.email "baltacmihaicristian@gmail.com"
           git config --global user.name "BaltacMihai"
           git add commits.txt
-          git commit -m "Add commits.txt"
+          git commit -m "Add commitsList.txt"
           git push origin main
         env:
           GITHUB_TOKEN: ${{ secrets.COMMITS_TOKEN }}
