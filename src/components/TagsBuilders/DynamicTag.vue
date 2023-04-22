@@ -162,6 +162,7 @@ export default {
     tag: Object,
   },
   data() {
+    console.log("Recompile");
     return {
       isMinimized: false,
       isTagSettingsOpened: false,

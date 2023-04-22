@@ -1,8 +1,15 @@
 <template>
   <div class="tag-container">
-    <template v-for="(tagChild, index) in tag.content" :key="index">
-      <DynamicTag :tag="tagChild" @delete="deleteTag" />
-    </template>
+    <draggable
+      v-model="tag.content"
+      :key="tag.content.map((c) => c.id)"
+      :itemKey="(item) => item.id"
+      group="tags"
+    >
+      <template v-slot:item="{ element }">
+        <DynamicTag :tag="element" @delete="deleteTag" />
+      </template>
+    </draggable>
     <div class="btn" @click="addElement">
       <img class="addItem" src="@/assets/icons/additem.svg" />
       <p>Add New Tag</p>
@@ -12,10 +19,12 @@
 
 <script>
 import DynamicTag from "./DynamicTag.vue";
+import draggable from "vuedraggable";
 
 export default {
   components: {
     DynamicTag,
+    draggable,
   },
   props: {
     tag: Object,
@@ -54,6 +63,12 @@ export default {
   display: flex;
   flex-direction: column;
   gap: 2rem;
+
+  & > div:not(.btn) {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
 }
 
 .btn {
