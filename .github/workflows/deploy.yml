@@ -52,16 +52,16 @@ jobs:
         uses: actions/deploy-pages@v1
 
   create_file:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-        with:
-          node-version: 18
+      runs-on: ubuntu-latest
+      steps:
+        - name: Checkout Repository
+          uses: actions/checkout@v3
+          with:
+            node-version: '16.x'
 
-      - name: Create Commits File
-        run: |
-          git log --format=%B | grep -E '^[A-Z]{2,}-[0-9]+' > commits.txt
+        - name: Create Commits File
+          run: |
+            git log --format=%B | grep -E '^[A-Z]{2,}-[0-9]+' > commits.txt
           git config --global user.email "baltacmihaicristian@gmail.com"
           git config --global user.name "BaltacMihai"
           git add commits.txt
