@@ -17,7 +17,28 @@ export default {
         fileType: "mdx",
         additionalInfo: mdxDefaultTemplate,
       },
+      pageContent: {
+        content: exampleTest,
+      },
+      formattedVersion: null,
+      fileUrl:
+        "https://raw.githubusercontent.com/BaltacMihai/AtlasPad/main/versions.map.txt",
     };
+  },
+  async mounted() {
+    try {
+      const response = await fetch(this.fileUrl);
+      const fileContents = await response.text();
+      const rows = fileContents.split("\n");
+      const lastRow = rows[rows.length - 1];
+      const versionMatch = lastRow.match(/^v(\d+\.\d+\.\d+)\s/);
+      if (versionMatch) {
+        const version = versionMatch[1];
+        this.formattedVersion = `Version: ${version}`;
+      }
+    } catch (error) {
+      console.error(error);
+    }
   },
 };
 </script>
@@ -25,9 +46,9 @@ export default {
 <template>
   <div class="content">
     <Settings :pageSettings="pageSettings" :pageContent="exampleTest" />
-    <TagsTree :contentJson="exampleTest" :pageName="pageSettings.fileName" />
+    <TagsTree :tags="pageContent" :pageName="pageSettings.fileName" />
   </div>
-  <p class="version">Version: 1.1.1</p>
+  <p class="version">{{ formattedVersion }}</p>
 </template>
 
 <style lang="scss">

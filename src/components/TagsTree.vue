@@ -2,7 +2,7 @@
   <div class="content-page">
     <h1>{{ pageName }}</h1>
     <div class="tag-builder">
-      <TagBuilder :tags="contentJson" />
+      <TagBuilder :tags="tags" />
       <div class="btn" @click="addElement">
         <img class="addItem" src="@/assets/icons/additem.svg" />
         <p>Add New Tag</p>
@@ -17,7 +17,7 @@ import createNewTag from "@/utils/DefaultTags/createNewTag.js";
 
 export default {
   props: {
-    contentJson: Object,
+    tags: Object,
     pageName: String,
   },
   components: {
@@ -29,7 +29,7 @@ export default {
   methods: {
     addElement() {
       const newElement = createNewTag();
-      this.contentJson.push(newElement);
+      this.tags.content.push(newElement);
     },
   },
 };
@@ -51,6 +51,12 @@ export default {
     display: flex;
     flex-direction: column;
     gap: 3rem;
+
+    & > div:not(.btn) {
+      display: flex;
+      flex-direction: column;
+      gap: 3rem;
+    }
   }
   .btn {
     background: #2c2c2c;
