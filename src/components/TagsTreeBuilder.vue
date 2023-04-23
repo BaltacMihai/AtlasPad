@@ -24,9 +24,9 @@ export default {
   },
   methods: {
     deleteTag(tag) {
-      const index = this.tags.indexOf(tag);
+      const index = this.tags.content.indexOf(tag);
       if (index !== -1) {
-        this.tags.splice(index, 1);
+        this.tags.content.splice(index, 1);
       }
     },
   },
