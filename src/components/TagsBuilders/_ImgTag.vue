@@ -11,7 +11,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 img {
-  width: 100%;
+  max-width: 100%;
   object-fit: cover;
 }
 </style>

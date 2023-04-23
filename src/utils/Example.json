@@ -1,33 +1,31 @@
 [
   {
-    "tagName": "div",
-    "tagAttributes": {
-      "class": "",
-      "id": "",
-      "custom": ""
-    },
+    "tagName": "nav",
+    "tagSettings": { "isMinimized": false, "isTagSettingsOpened": false },
+    "tagAttributes": { "class": "", "id": "", "custom": "" },
     "tagType": "container",
     "content": [
       {
-        "tagName": "p",
-        "tagAttributes": {
-          "class": "",
-          "id": "",
-          "custom": ""
-        },
+        "tagName": "h1",
+        "tagSettings": { "isMinimized": false, "isTagSettingsOpened": false },
+        "tagAttributes": { "class": "", "id": "", "custom": "" },
         "tagType": "text",
         "content": []
       },
       {
-        "tagName": "img",
-        "tagAttributes": {
-          "class": "",
-          "id": "",
-          "custom": ""
-        },
-        "tagType": "media",
+        "tagName": "a",
+        "tagSettings": { "isMinimized": false, "isTagSettingsOpened": false },
+        "tagAttributes": { "class": "", "id": "", "custom": "" },
+        "tagType": "link",
         "content": []
       }
     ]
+  },
+  {
+    "tagName": "main",
+    "tagSettings": { "isMinimized": false, "isTagSettingsOpened": false },
+    "tagAttributes": { "class": "", "id": "", "custom": "" },
+    "tagType": "container",
+    "content": []
   }
 ]

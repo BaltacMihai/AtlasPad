@@ -19,6 +19,11 @@ $cl-black: #2c2c2c;
     font-size: $fs-text;
     letter-spacing: $letter-spacing-size;
   }
+  .options {
+    display: flex;
+    flex-direction: column;
+    gap: $gap;
+  }
   .input__radio {
     display: flex;
     align-items: center;

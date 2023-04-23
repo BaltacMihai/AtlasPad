@@ -30,16 +30,6 @@
 
       <div class="form__content">
         <template v-if="selectedTab == 'file'">
-          <!-- <div class="input__group">
-            <label for="name">Name</label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              v-model="pageSettings.fileName"
-              placeholder="Page's name"
-            />
-          </div> -->
           <TextInput
             label-name="Name"
             inputFor="fileName"

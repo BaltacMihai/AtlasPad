@@ -1,6 +1,6 @@
 <template>
   <div class="form__page__mdx">
-    <RadioInput
+    <RadioTextInput
       label-name="Title"
       input-for="title"
       :options-text="['Same as file', 'Custom']"
@@ -28,28 +28,28 @@
 
     <div class="internal__tabs__content">
       <template v-if="activeTab == 'meta'">
-        <RadioInput
+        <RadioTextInput
           label-name="Charset"
           input-for="charset"
           :options-text="['None', 'Custom']"
           :value="additionalInfo.meta"
           placeholder="UTF-8"
         />
-        <RadioInput
+        <RadioTextInput
           label-name="Keywords"
           input-for="keywords"
           :options-text="['None', 'Custom']"
           :value="additionalInfo.meta"
           placeholder="HTML, CSS, JavaScript"
         />
-        <RadioInput
+        <RadioTextInput
           label-name="Description"
           input-for="description"
           :options-text="['None', 'Custom']"
           :value="additionalInfo.meta"
           placeholder="Generated with MDX Builder"
         />
-        <RadioInput
+        <RadioTextInput
           label-name="Author"
           input-for="author"
           :options-text="['None', 'Custom']"
@@ -57,7 +57,7 @@
           placeholder="Baltac Mihai"
         />
 
-        <RadioInput
+        <RadioTextInput
           label-name="Viewport"
           input-for="viewport"
           :options-text="['Default', 'Custom']"
@@ -105,14 +105,14 @@
 </template>
 
 <script>
-import RadioInput from "../Inputs/RadioInput.vue";
+import RadioTextInput from "../Inputs/RadioTextInput.vue";
 import TextareaInput from "../Inputs/TextareaInput.vue";
 export default {
   props: {
     additionalInfo: Object,
   },
   components: {
-    RadioInput,
+    RadioTextInput,
     TextareaInput,
   },
   data() {

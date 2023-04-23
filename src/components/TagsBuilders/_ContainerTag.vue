@@ -20,6 +20,7 @@
 <script>
 import DynamicTag from "./DynamicTag.vue";
 import draggable from "vuedraggable";
+import createNewTag from "@/utils/DefaultTags/createNewTag.js";
 
 export default {
   components: {
@@ -34,21 +35,10 @@ export default {
   },
   methods: {
     addElement() {
-      const newElement = {
-        tagName: "section",
-        tagAttributes: {
-          class: "",
-          id: "",
-          custom: "",
-        },
-        tagType: "container",
-        content: [],
-      };
-
+      const newElement = createNewTag();
       this.tag.content.push(newElement);
     },
     deleteTag(tag) {
-      console.log(tag);
       const index = this.tag.content.indexOf(tag);
       if (index !== -1) {
         this.tag.content.splice(index, 1);

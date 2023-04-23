@@ -13,6 +13,7 @@
 
 <script>
 import TagBuilder from "./TagsTreeBuilder.vue";
+import createNewTag from "@/utils/DefaultTags/createNewTag.js";
 
 export default {
   props: {
@@ -27,17 +28,7 @@ export default {
   },
   methods: {
     addElement() {
-      const newElement = {
-        tagName: "section",
-        tagAttributes: {
-          class: "",
-          id: "",
-          custom: "",
-        },
-        tagType: "container",
-        content: [],
-      };
-
+      const newElement = createNewTag();
       this.contentJson.push(newElement);
     },
   },

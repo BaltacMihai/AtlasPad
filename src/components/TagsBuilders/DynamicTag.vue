@@ -43,7 +43,7 @@
       </div>
       <div class="tag__settings__content">
         <template v-if="currentTab == 'settings'">
-          <SimpleRadioInput
+          <RadioInput
             label-name="Custom Tag"
             :options-text="['No', 'Yes']"
             :value="isCustomTag"
@@ -140,7 +140,7 @@
 
 <script>
 import { defineAsyncComponent } from "vue";
-import SimpleRadioInput from "@/components/partials/Inputs/SimpleRadioInput.vue";
+import RadioInput from "@/components/partials/Inputs/RadioInput.vue";
 import TextInput from "@/components/partials/Inputs/TextInput.vue";
 import defaultTags from "@/utils/DefaultTags/HTMLTags.json";
 import defaultTypeTags from "@/utils/DefaultTags/TypeTags.json";
@@ -267,7 +267,7 @@ export default {
   },
 
   components: {
-    SimpleRadioInput,
+    RadioInput,
     TextInput,
   },
 };
