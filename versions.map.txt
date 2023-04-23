@@ -1,3 +1,4 @@
 v1.0.0 - P.O.C. launched
 v1.0.1 - [Bug] Solved the dynamic img src
 v1.1.0 - [Feature] Drag & Drop
+v1.1.1 - [Bug] Solved the drop item action overwrite the status of the siblings ( minimized or not )

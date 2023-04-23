@@ -1,5 +1,5 @@
 <template>
-  <div class="tag" :class="{ minimized: isMinimized }">
+  <div class="tag" :class="{ minimized: tag.tagSettings.isMinimized }">
     <div class="tag__header">
       <div class="tag__header__name">
         <img :src="generateTagIcon" alt="containerIcon" />
@@ -26,7 +26,10 @@
         />
       </div>
     </div>
-    <div class="tag__settings" :class="{ minimized: !isTagSettingsOpened }">
+    <div
+      class="tag__settings"
+      :class="{ minimized: !tag.tagSettings.isTagSettingsOpened }"
+    >
       <tabs :options="{ useUrlFragment: false }" nav-item-class="nav-item">
         <tab name="Settings">
           <RadioInput
@@ -146,8 +149,6 @@ export default {
   },
   data() {
     return {
-      isMinimized: false,
-      isTagSettingsOpened: false,
       isCustomTag: false,
       attributes: {
         id: "",
@@ -195,7 +196,7 @@ export default {
     },
 
     expandCollapseIcon() {
-      return this.isMinimized ? expandImgSrc : shrinkImgSrc;
+      return this.tag.tagSettings.isMinimized ? expandImgSrc : shrinkImgSrc;
     },
     defaultTagsName() {
       const tagNames = [];
@@ -236,11 +237,13 @@ export default {
     },
 
     collapseElement() {
-      this.isMinimized = !this.isMinimized;
-      this.isTagSettingsOpened = !this.isTagSettingsOpened;
+      this.tag.tagSettings.isMinimized = !this.tag.tagSettings.isMinimized;
+      this.tag.tagSettings.isTagSettingsOpened =
+        !this.tag.tagSettings.isTagSettingsOpened;
     },
     openSettings() {
-      this.isTagSettingsOpened = !this.isTagSettingsOpened;
+      this.tag.tagSettings.isTagSettingsOpened =
+        !this.tag.tagSettings.isTagSettingsOpened;
     },
   },
 
