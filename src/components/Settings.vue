@@ -10,26 +10,8 @@
         />
       </div>
 
-      <div class="form__tabs">
-        <p
-          :class="{ active: selectedTab == 'file' }"
-          @click="changeTab('file')"
-        >
-          File
-        </p>
-        <p
-          :class="{
-            active: selectedTab == 'page',
-            disabled: pageSettings.fileType == 'md',
-          }"
-          @click="pageSettings.fileType != 'md' ? changeTab('page') : () => {}"
-        >
-          Page
-        </p>
-      </div>
-
-      <div class="form__content">
-        <template v-if="selectedTab == 'file'">
+      <tabs :options="{ useUrlFragment: false }" nav-item-class="nav-item">
+        <tab name="File">
           <TextInput
             label-name="Name"
             inputFor="fileName"
@@ -53,14 +35,14 @@
               Affects app content.
             </div>
           </div>
-        </template>
-        <template v-else-if="selectedTab == 'page'">
+        </tab>
+        <tab name="Page" :is-disabled="pageSettings.fileType == 'md'">
           <component
             :is="pageSettingsForm"
             :additionalInfo="pageSettings.additionalInfo"
           />
-        </template>
-      </div>
+        </tab>
+      </tabs>
 
       <div class="form__actions">
         <div class="btn" @click="saveFile">Save</div>
@@ -95,7 +77,6 @@ export default {
   data() {
     return {
       isOpened: true,
-      selectedTab: "file",
     };
   },
   computed: {
@@ -106,7 +87,6 @@ export default {
             import("@/components/partials/settingsForm/MdxForm.vue")
           );
         case "md":
-          EmptyForm;
           return defineAsyncComponent(() =>
             import("@/components/partials/settingsForm/EmptyForm.vue")
           );
@@ -120,9 +100,6 @@ export default {
   methods: {
     triggerSettings() {
       this.isOpened = !this.isOpened;
-    },
-    changeTab(tabName) {
-      this.selectedTab = tabName;
     },
     changeTypeOfFile(event) {
       this.pageSettings.fileType = event.target.value;
@@ -216,96 +193,15 @@ export default {
     }
   }
 
-  &__tabs {
-    display: flex;
-    border-bottom: 1px solid #444444;
-    padding: 0 1rem;
-    gap: 1rem;
-
-    p {
-      padding: 1rem 0;
-      color: #f2f2f2;
-      font-size: 1.1rem;
-      letter-spacing: 1px;
-
-      &.active {
-        border-bottom: 2px solid #444444;
-        font-weight: bold;
-      }
-
-      &:not(.active) {
-        color: darken($color: #f2f2f2, $amount: 20);
-      }
-
-      &:hover {
-        cursor: pointer;
-        opacity: 0.75;
-      }
-
-      &.disabled {
-        color: #444444;
-        &:hover {
-          opacity: 1;
-          cursor: not-allowed;
-        }
-      }
-    }
-  }
-
-  &__content {
+  .tabs-component-panels section {
     padding: 1rem;
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 
     // Overflow Settings
-
     max-height: 70vh;
     overflow-y: auto;
-
-    .input__group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-
-      label {
-        color: #f2f2f2;
-        font-size: 1rem;
-        letter-spacing: 1px;
-      }
-      input,
-      select {
-        background-color: #f2f2f2;
-        border: none;
-        border-radius: 5px;
-        font-size: 1rem;
-        padding: 0.5rem;
-
-        &:is(:hover, :focus, :focus-visible) {
-          border: none;
-          outline: none;
-        }
-      }
-      .disclaimer {
-        color: #f2f2f2;
-        font-size: 0.9rem;
-        letter-spacing: 0.5px;
-        padding-left: 1rem;
-
-        display: none;
-        align-items: center;
-        gap: 0.25rem;
-
-        img {
-          width: 20px;
-        }
-      }
-      &:hover {
-        .disclaimer {
-          display: flex;
-        }
-      }
-    }
   }
 
   &__actions {

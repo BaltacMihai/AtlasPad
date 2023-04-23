@@ -50,6 +50,4 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@use "@/assets/scss";
-</style>
+<style lang="scss" scoped></style>

@@ -1,7 +1,0 @@
-// draggable - overwrite
-// we want to drag the item
-[data-draggable="true"] {
-  &:is(:target, :hover, :active, :target-within) {
-    cursor: grab;
-  }
-}

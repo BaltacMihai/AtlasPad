@@ -8,26 +8,8 @@
       placeholder="HTML's page name"
     />
 
-    <div class="internal__tabs">
-      <p :class="{ active: activeTab == 'meta' }" @click="changeTab('meta')">
-        Meta
-      </p>
-      <p
-        :class="{ active: activeTab == 'styles' }"
-        @click="changeTab('styles')"
-      >
-        Styles
-      </p>
-      <p
-        :class="{ active: activeTab == 'scripts' }"
-        @click="changeTab('scripts')"
-      >
-        Scripts
-      </p>
-    </div>
-
-    <div class="internal__tabs__content">
-      <template v-if="activeTab == 'meta'">
+    <tabs :options="{ useUrlFragment: false }" nav-item-class="nav-item">
+      <tab name="Meta">
         <RadioTextInput
           label-name="Charset"
           input-for="charset"
@@ -64,8 +46,8 @@
           :value="additionalInfo.meta"
           placeholder="width=device-width, initial-scale=1.0"
         />
-      </template>
-      <template v-else-if="activeTab == 'styles'">
+      </tab>
+      <tab name="Styles">
         <TextareaInput
           labelName="Imports"
           inputFor="imports"
@@ -79,8 +61,8 @@
           placeholder="body { &#10; &nbsp; background-color: linen; &#10; &nbsp; } &#10; &#10; h1 { &#10; &nbsp; color: maroon; &#10; &nbsp; margin-left: 40px; &#10; &nbsp; }"
           initialHeight="10"
         />
-      </template>
-      <template v-else-if="activeTab == 'scripts'">
+      </tab>
+      <tab name="Scripts">
         <TextareaInput
           labelName="Head Imports"
           inputFor="headImports"
@@ -99,8 +81,8 @@
           :value="additionalInfo.script"
           placeholder="document.getElementById('demo').innerHTML = 'Hello JavaScript!'';"
         />
-      </template>
-    </div>
+      </tab>
+    </tabs>
   </div>
 </template>
 
@@ -120,15 +102,11 @@ export default {
       title: {
         data: null,
       },
-      activeTab: "meta",
     };
   },
   methods: {
     changeTitleDefault() {
       this.isTitleDefault = !this.isTitleDefault;
-    },
-    changeTab(tabName) {
-      this.activeTab = tabName;
     },
   },
 };
@@ -140,44 +118,18 @@ export default {
   flex-direction: column;
   gap: 1.5rem;
 
-  .internal__tabs {
+  .tabs-component {
     display: flex;
-    border-bottom: 1px solid #444444;
+    flex-direction: column;
     margin-left: -1rem;
     width: calc(100% + 2rem);
 
-    &__content {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
+    &-tabs {
+      padding: 0;
+      gap: 0;
 
-    p {
-      padding: 1rem;
-      color: #f2f2f2;
-      font-size: 1.1rem;
-      letter-spacing: 1px;
-
-      &.active {
-        border-bottom: 2px solid #444444;
-        font-weight: bold;
-      }
-
-      &:not(.active) {
-        color: darken($color: #f2f2f2, $amount: 20);
-      }
-
-      &:hover {
-        cursor: pointer;
-        opacity: 0.75;
-      }
-
-      &.disabled {
-        color: #444444;
-        &:hover {
-          opacity: 1;
-          cursor: not-allowed;
-        }
+      .nav-item {
+        padding: 1rem;
       }
     }
   }

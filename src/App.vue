@@ -30,16 +30,8 @@ export default {
   <p class="version">Version: 1.1.0</p>
 </template>
 
-<style>
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
-* {
-  padding: 0;
-  margin: 0;
-  font-family: "Open Sans", sans-serif;
-}
-body {
-  background-color: #f2f2f2;
-}
+<style lang="scss">
+@use "@/assets/scss";
 
 .form ~ .content-page {
   width: 80%;

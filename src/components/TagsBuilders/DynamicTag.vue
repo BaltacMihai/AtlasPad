@@ -27,22 +27,8 @@
       </div>
     </div>
     <div class="tag__settings" :class="{ minimized: !isTagSettingsOpened }">
-      <div class="tag__settings__tabs">
-        <p
-          :class="{ active: currentTab == 'settings' }"
-          @click="changeTab('settings')"
-        >
-          Settings
-        </p>
-        <p
-          :class="{ active: currentTab == 'attributes' }"
-          @click="changeTab('attributes')"
-        >
-          Attributes
-        </p>
-      </div>
-      <div class="tag__settings__content">
-        <template v-if="currentTab == 'settings'">
+      <tabs :options="{ useUrlFragment: false }" nav-item-class="nav-item">
+        <tab name="Settings">
           <RadioInput
             label-name="Custom Tag"
             :options-text="['No', 'Yes']"
@@ -87,23 +73,21 @@
                 </template>
               </select>
             </div>
-          </template>
-        </template>
-        <template v-else-if="currentTab == 'attributes'">
+          </template></tab
+        >
+        <tab name="Attributes">
           <TextInput
             label-name="Id"
             inputFor="id"
             placeholder="Tag's id"
             :value="tag.tagAttributes"
-            class="inverse"
-          />
+            class="inverse" />
           <TextInput
             label-name="Class"
             inputFor="class"
             placeholder="Tag's class"
             :value="tag.tagAttributes"
-            class="inverse"
-          />
+            class="inverse" />
           <template v-if="tag.tagType == 'link'">
             <TextInput
               label-name="Hyperlink"
@@ -128,9 +112,8 @@
             placeholder="Tag's custom attributes"
             :value="tag.tagAttributes"
             class="inverse"
-          />
-        </template>
-      </div>
+        /></tab>
+      </tabs>
     </div>
     <div class="tag__container">
       <component :is="childTag" :tag="tag" @delete="deleteTag" />
@@ -162,11 +145,9 @@ export default {
     tag: Object,
   },
   data() {
-    console.log("Recompile");
     return {
       isMinimized: false,
       isTagSettingsOpened: false,
-      currentTab: "settings",
       isCustomTag: false,
       attributes: {
         id: "",
@@ -261,9 +242,6 @@ export default {
     openSettings() {
       this.isTagSettingsOpened = !this.isTagSettingsOpened;
     },
-    changeTab(tabName) {
-      this.currentTab = tabName;
-    },
   },
 
   components: {
@@ -273,8 +251,7 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
-@use "@/assets/scss";
+<style lang="scss">
 .tag {
   border: 1px solid #2c2c2c;
   border-radius: 10px;
@@ -329,35 +306,27 @@ export default {
     }
     display: flex;
 
-    &__tabs {
-      display: flex;
-      border-bottom: 1px solid #dadada;
-      padding: 0 1rem;
-      gap: 1rem;
-
-      p {
-        padding: 1rem 0;
-        font-size: 1.1rem;
-        letter-spacing: 1px;
-        &.active {
-          border-bottom: 2px solid #dadada;
-          font-weight: bold;
-
-          &:not(.active) {
-            color: #bfbfbf;
+    .tabs-component {
+      &-tabs {
+        border-bottom-color: #dadada;
+        .nav-item {
+          a {
+            color: #444444;
+          }
+          &.is-active {
+            border-bottom-color: #dadada;
+          }
+          &.is-inactive a {
+            color: lighten($color: #444444, $amount: 20);
           }
         }
-        &:hover {
-          cursor: pointer;
-          opacity: 0.75;
-        }
       }
-    }
-    &__content {
-      padding: 1rem;
-      display: flex;
-      gap: 2.5rem;
-      flex-wrap: wrap;
+      &-panel {
+        padding: 1rem;
+        display: flex;
+        gap: 2.5rem;
+        flex-wrap: wrap;
+      }
     }
   }
 
