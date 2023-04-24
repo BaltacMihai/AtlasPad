@@ -89,6 +89,7 @@ export default {
             import("@/components/partials/settingsForm/MdxForm.vue")
           );
         case "md":
+          this.pageContent.content = [];
           return defineAsyncComponent(() =>
             import("@/components/partials/settingsForm/EmptyForm.vue")
           );

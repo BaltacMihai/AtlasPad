@@ -12,11 +12,6 @@ export default {
   data() {
     return {
       exampleTest,
-      pageSettings: {
-        fileName: "New Page",
-        fileType: "mdx",
-        additionalInfo: mdxDefaultTemplate,
-      },
       pageContent: {
         content: exampleTest,
       },

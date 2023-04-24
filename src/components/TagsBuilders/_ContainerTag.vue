@@ -22,6 +22,8 @@ import DynamicTag from "./DynamicTag.vue";
 import draggable from "vuedraggable";
 import createNewTag from "@/utils/DefaultTags/createNewTag.js";
 
+import { usePageSettings } from "@/stores/pageSettings";
+import { storeToRefs } from "pinia";
 export default {
   components: {
     DynamicTag,
@@ -31,11 +33,13 @@ export default {
     tag: Object,
   },
   data() {
-    return {};
+    const pageSettings = usePageSettings();
+    const { fileType } = storeToRefs(pageSettings);
+    return { fileType };
   },
   methods: {
     addElement() {
-      const newElement = createNewTag();
+      const newElement = createNewTag(fileType);
       this.tag.content.push(newElement);
     },
     deleteTag(tag) {

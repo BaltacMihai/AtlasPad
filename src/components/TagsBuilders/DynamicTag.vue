@@ -38,6 +38,7 @@
             :value="isCustomTag"
             :change="handleIsCustomTag"
             class="inverse"
+            v-if="fileType != 'md'"
           />
 
           <template v-if="isCustomTag">
@@ -78,7 +79,7 @@
             </div>
           </template></tab
         >
-        <tab name="Attributes">
+        <tab name="Attributes" v-if="fileType != 'md'">
           <TextInput
             label-name="Id"
             inputFor="id"
@@ -210,7 +211,6 @@ export default {
     },
     defaultTagsName() {
       const defaultTags = getDefaultTags(this.fileType);
-      console.log(defaultTags);
 
       return defaultTags.map((tag) => tag.name);
     },

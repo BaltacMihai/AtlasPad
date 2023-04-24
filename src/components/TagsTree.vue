@@ -26,14 +26,15 @@ export default {
   },
   data() {
     const pageSettings = usePageSettings();
-    const { fileName } = storeToRefs(pageSettings);
+    const { fileName, fileType } = storeToRefs(pageSettings);
     return {
       pageName: fileName,
+      fileType,
     };
   },
   methods: {
     addElement() {
-      const newElement = createNewTag();
+      const newElement = createNewTag(this.fileType);
       this.tags.content.push(newElement);
     },
   },
