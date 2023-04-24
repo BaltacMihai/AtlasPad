@@ -128,7 +128,9 @@
 import { defineAsyncComponent } from "vue";
 import RadioInput from "@/components/partials/Inputs/RadioInput.vue";
 import TextInput from "@/components/partials/Inputs/TextInput.vue";
-import defaultTags from "@/utils/DefaultTags/HTMLTags.json";
+
+import getDefaultTags from "@/utils/DefaultTags/returnDefaultTags";
+
 import defaultTypeTags from "@/utils/DefaultTags/TypeTags.json";
 
 //Import dynamical the icons
@@ -143,11 +145,18 @@ import linkTagImgSrc from "@/assets/icons/tags/link.svg";
 import containerTagImgSrc from "@/assets/icons/tags/container.svg";
 import closingTagImgSrc from "@/assets/icons/tags/closingTag.svg";
 
+// Store
+import { usePageSettings } from "@/stores/pageSettings";
+import { storeToRefs } from "pinia";
+
 export default {
   props: {
     tag: Object,
   },
   data() {
+    const pageSettings = usePageSettings();
+    const { fileType } = storeToRefs(pageSettings);
+
     return {
       isCustomTag: false,
       attributes: {
@@ -155,6 +164,7 @@ export default {
         class: "",
         custom: "",
       },
+      fileType,
     };
   },
 
@@ -199,11 +209,10 @@ export default {
       return this.tag.tagSettings.isMinimized ? expandImgSrc : shrinkImgSrc;
     },
     defaultTagsName() {
-      const tagNames = [];
-      defaultTags.tags.forEach((tag) => {
-        tagNames.push(tag.name);
-      });
-      return tagNames;
+      const defaultTags = getDefaultTags(this.fileType);
+      console.log(defaultTags);
+
+      return defaultTags.map((tag) => tag.name);
     },
     defaultTypeTags() {
       const tagTypes = [];
@@ -219,9 +228,9 @@ export default {
     },
     changeDefaultType() {
       const name = this.tag.tagName;
-      const nameObject = defaultTags.tags.find((t) => t.name === name);
+      const defaultTags = getDefaultTags(this.fileType);
+      const nameObject = defaultTags.find((t) => t.name === name);
       if (nameObject) {
-        console.log(nameObject);
         this.tag.tagType = nameObject.type;
       }
     },

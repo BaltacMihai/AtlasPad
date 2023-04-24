@@ -68,15 +68,17 @@ import mdxDefaultTemplate from "@/utils/FileSettingsTemplate/MDX.json";
 import generateJsonFile from "@/utils/GenerateJsonFile";
 import exportMdxFile from "@/utils/ExportFile/ExportMdx";
 import exportHtmlFile from "@/utils/ExportFile/ExportHTML";
+import exportMdFile from "@/utils/ExportFile/ExportMd";
 
+import { usePageSettings } from "@/stores/pageSettings";
 export default {
   props: {
-    pageSettings: Object,
     pageContent: Object,
   },
   data() {
     return {
       isOpened: true,
+      pageSettings: usePageSettings(),
     };
   },
   computed: {
@@ -128,6 +130,10 @@ export default {
         case "mdx":
           exportMdxFile(this.pageSettings, this.pageContent);
           break;
+        case "md":
+          exportMdFile(this.pageSettings, this.pageContent);
+          break;
+
         default:
           generateJsonFile(this.pageSettings, this.pageContent);
       }

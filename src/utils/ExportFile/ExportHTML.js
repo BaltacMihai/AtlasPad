@@ -4,8 +4,6 @@ import { saveAs } from "file-saver";
 export default function exportHtmlFile(fileSettings, fileContent) {
   let compiledTags = "";
 
-  console.log();
-
   //   Generate Header Of The HTML File
   const title =
     fileSettings.additionalInfo.title == null

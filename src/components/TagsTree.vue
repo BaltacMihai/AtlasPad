@@ -14,17 +14,22 @@
 <script>
 import TagBuilder from "./TagsTreeBuilder.vue";
 import createNewTag from "@/utils/DefaultTags/createNewTag.js";
+import { usePageSettings } from "@/stores/pageSettings";
+import { storeToRefs } from "pinia";
 
 export default {
   props: {
     tags: Object,
-    pageName: String,
   },
   components: {
     TagBuilder,
   },
   data() {
-    return {};
+    const pageSettings = usePageSettings();
+    const { fileName } = storeToRefs(pageSettings);
+    return {
+      pageName: fileName,
+    };
   },
   methods: {
     addElement() {

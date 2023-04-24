@@ -45,8 +45,8 @@ export default {
 
 <template>
   <div class="content">
-    <Settings :pageSettings="pageSettings" :pageContent="exampleTest" />
-    <TagsTree :tags="pageContent" :pageName="pageSettings.fileName" />
+    <Settings :pageContent="pageContent" />
+    <TagsTree :tags="pageContent" />
   </div>
   <p class="version">{{ formattedVersion }}</p>
 </template>

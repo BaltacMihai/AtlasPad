@@ -1,0 +1,64 @@
+{
+  "tags": [
+    {
+      "name": "h1",
+      "type": "text"
+    },
+    {
+      "name": "h2",
+      "type": "text"
+    },
+    {
+      "name": "h3",
+      "type": "text"
+    },
+    {
+      "name": "p",
+      "type": "text"
+    },
+    {
+      "name": "b",
+      "type": "text"
+    },
+    {
+      "name": "i",
+      "type": "text"
+    },
+    {
+      "name": "a",
+      "type": "link"
+    },
+    {
+      "name": "ul",
+      "type": "container"
+    },
+    {
+      "name": "ol",
+      "type": "container"
+    },
+    {
+      "name": "blockquote",
+      "type": "container"
+    },
+    {
+      "name": "img",
+      "type": "media"
+    },
+    {
+      "name": "Code - long",
+      "type": "text"
+    },
+    {
+      "name": "Code - short",
+      "type": "text"
+    },
+    {
+      "name": "line",
+      "type": "singleTag"
+    },
+    {
+      "name": "Inline content",
+      "type": "container"
+    }
+  ]
+}
