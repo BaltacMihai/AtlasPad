@@ -17,11 +17,15 @@
       "type": "text"
     },
     {
-      "name": "b",
+      "name": "bold",
       "type": "text"
     },
     {
-      "name": "i",
+      "name": "italic",
+      "type": "text"
+    },
+    {
+      "name": "scratch",
       "type": "text"
     },
     {
@@ -45,11 +49,7 @@
       "type": "media"
     },
     {
-      "name": "Code - long",
-      "type": "text"
-    },
-    {
-      "name": "Code - short",
+      "name": "code",
       "type": "text"
     },
     {
@@ -57,7 +57,7 @@
       "type": "singleTag"
     },
     {
-      "name": "Inline content",
+      "name": "inline content",
       "type": "container"
     }
   ]

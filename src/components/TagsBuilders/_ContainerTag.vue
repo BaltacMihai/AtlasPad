@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     addElement() {
-      const newElement = createNewTag(fileType);
+      const newElement = createNewTag(this.fileType);
       this.tag.content.push(newElement);
     },
     deleteTag(tag) {

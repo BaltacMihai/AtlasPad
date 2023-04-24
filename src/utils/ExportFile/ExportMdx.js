@@ -3,11 +3,12 @@ import { saveAs } from "file-saver";
 
 export default function exportMdxFile(fileSettings, fileContent) {
   let compiledTags = "";
+
   const frontMatter = fileSettings.additionalInfo.frontMatter;
   const imports = fileSettings.additionalInfo.imports;
   const variables = fileSettings.additionalInfo.variables;
 
-  fileContent?.forEach((tag) => {
+  fileContent.content?.forEach((tag) => {
     compiledTags += generateTags(tag);
   });
 

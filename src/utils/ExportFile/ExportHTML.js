@@ -54,7 +54,7 @@ export default function exportHtmlFile(fileSettings, fileContent) {
       ? ""
       : `<script>${fileSettings.additionalInfo.script.custom}</script>`;
 
-  fileContent?.forEach((tag) => {
+  fileContent.content?.forEach((tag) => {
     compiledTags += generateTags(tag);
   });
 

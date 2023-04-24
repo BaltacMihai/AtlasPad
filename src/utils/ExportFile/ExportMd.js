@@ -1,67 +1,61 @@
 import { saveAs } from "file-saver";
+import generateSimpleMDContent from "./_generateSimpleMDContent";
 
 export default function exportMdFile(fileSettings, fileContent) {
   let compiledFileContent = "";
+
   fileContent.content.forEach((tag) => {
     switch (tag.tagName) {
-      case "h1":
-        compiledFileContent += `# ${tag.content}\n\n`;
+      case "ul":
+        {
+          const listContent = tag.content
+            ?.map((childTag) => generateSimpleMDContent(childTag))
+            .join("\n- ")
+            .replace(/-\s+$/, ""); // remove trailing dash
 
+          compiledFileContent += `- ${listContent} \n`;
+        }
         break;
 
-      case "h2":
-        compiledFileContent += `## ${tag.content}\n\n`;
+      case "ol":
+        {
+          const listContent = tag.content
+            ?.map((childTag) => generateSimpleMDContent(childTag))
+            .join("\n1. ")
+            .replace(/-\s+$/, ""); // remove trailing dash
+
+          compiledFileContent += `1. ${listContent} \n`;
+        }
         break;
+      case "blockquote":
+        {
+          const listContent = tag.content
+            ?.map((childTag) => generateSimpleMDContent(childTag))
+            .join("\n> ")
+            .replace(/-\s+$/, ""); // remove trailing dash
 
-      case "h3":
-        compiledFileContent += `### ${tag.content}\n\n`;
+          compiledFileContent += `> ${listContent} \n`;
+        }
+
         break;
-
-      case "p":
-        compiledFileContent += `${tag.content}\n\n`;
-        break;
-
-      //   case "ul":
-      //     const listItems = Array.from(tag.children).map((li) =>
-      //       li.textContent.trim()
-      //     );
-      //     compiledFileContent +=
-      //       listItems.map((item) => `- ${item}`).join("\n") + "\n\n";
-      //     break;
-
-      //   case "img":
-      //     const altText = tag.getAttribute("alt") || "";
-      //     const src = tag.getAttribute("src") || "";
-      //     compiledFileContent += `![${altText}](${src})\n\n`;
-      //     break;
 
       case "code":
-        compiledFileContent += `\`\`\`\n${tag.content}\n\`\`\`\n\n`;
+        compiledFileContent += `\`\`\`${tag.tagAttributes.lang}\n${tag.content}\n\`\`\``;
         break;
 
-      case "b":
-        compiledFileContent += `**${tag.content}**\n\n`;
-        break;
+      case "inline content":
+        {
+          const listContent = tag.content
+            ?.map((childTag) => generateSimpleMDContent(childTag))
+            .join("  ");
 
-      case "i":
-        compiledFileContent += `_${tag.content}_\n\n`;
-        break;
-
-      //   case "a":
-      //     const href = tag.getAttribute("href") || "";
-      //     const linkText = tag.textContent.trim();
-      //     compiledFileContent += `[${linkText}](${href})\n\n`;
-      //     break;
-
-      case "blockquote":
-        const blockquoteContent = tag.content.split("\n").join(`\n> `);
-        compiledFileContent += `> ${blockquoteContent}\n\n`;
-
-        // compiledFileContent += `> ${tag.content}\n\n`;
+          compiledFileContent += `${listContent} \n`;
+        }
         break;
 
       default:
-        // Ignore other tags
+        compiledFileContent += generateSimpleMDContent(tag);
+        compiledFileContent += "\n";
         break;
     }
   });

@@ -117,6 +117,57 @@
             :value="tag.tagAttributes"
             class="inverse"
         /></tab>
+        <tab name="Attributes" v-else-if="tag.tagName == 'a'">
+          <TextInput
+            label-name="Source"
+            inputFor="src"
+            placeholder="Link's source"
+            :value="tag.tagAttributes"
+            class="inverse"
+          />
+
+          <TextInput
+            label-name="Hover Title"
+            inputFor="title"
+            placeholder="Title on hover"
+            :value="tag.tagAttributes"
+            class="inverse"
+          />
+        </tab>
+        <tab name="Attributes" v-else-if="tag.tagName == 'img'">
+          <TextInput
+            label-name="Alternative text"
+            inputFor="alt"
+            placeholder="Alternative text"
+            :value="tag.tagAttributes"
+            class="inverse"
+          />
+
+          <TextInput
+            label-name="Source"
+            inputFor="src"
+            placeholder="Link's source"
+            :value="tag.tagAttributes"
+            class="inverse"
+          />
+
+          <TextInput
+            label-name="Hover Title"
+            inputFor="title"
+            placeholder="Title on hover"
+            :value="tag.tagAttributes"
+            class="inverse"
+          />
+        </tab>
+        <tab name="Attributes" v-else-if="tag.tagName == 'code'">
+          <TextInput
+            label-name="Code language"
+            inputFor="lang"
+            placeholder="Code's language"
+            :value="tag.tagAttributes"
+            class="inverse"
+          />
+        </tab>
       </tabs>
     </div>
     <div class="tag__container">
