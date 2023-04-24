@@ -2,7 +2,7 @@
 import exampleTest from "./utils/Example.json";
 import TagsTree from "./components/TagsTree.vue";
 import Settings from "./components/Settings.vue";
-import mdxDefaultTemplate from "@/utils/FileSettingsTemplate/MDX.json";
+import { usePageSettings } from "@/stores/pageSettings";
 
 export default {
   components: {
@@ -15,12 +15,45 @@ export default {
       pageContent: {
         content: exampleTest,
       },
+      pageSettings: {},
       formattedVersion: null,
       fileUrl:
         "https://raw.githubusercontent.com/BaltacMihai/AtlasPad/main/versions.map.txt",
     };
   },
   async mounted() {
+    // Get the local storage if there is any
+    const localPageContent = localStorage.getItem("localPageContent");
+    const localPageSettings = localStorage.getItem("localPageSettings");
+
+    const pageSettings = usePageSettings();
+
+    // If data exists, parse the JSON string to an object
+    if (localPageContent) {
+      this.pageContent.content = JSON.parse(localPageContent);
+    }
+    if (localPageSettings) {
+      console.log(JSON.parse(localPageSettings));
+      pageSettings.updateSettings(JSON.parse(localPageSettings));
+    }
+
+    // Watch for changes in props and save to local storage
+    this.$watch(
+      () => [this.pageContent, pageSettings],
+      ([newPageContent, newPageSettings]) => {
+        localStorage.setItem(
+          "localPageContent",
+          JSON.stringify(newPageContent.content)
+        );
+
+        localStorage.setItem(
+          "localPageSettings",
+          JSON.stringify(newPageSettings)
+        );
+      },
+      { deep: true }
+    );
+    // Get the version of the app
     try {
       const response = await fetch(this.fileUrl);
       const fileContents = await response.text();
@@ -34,6 +67,11 @@ export default {
     } catch (error) {
       console.error(error);
     }
+  },
+  watch: {
+    pageContent(oldVersion, newVersion) {
+      console.log(oldVersion, newVersion);
+    },
   },
 };
 </script>

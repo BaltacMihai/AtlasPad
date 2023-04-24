@@ -7,12 +7,17 @@ export const usePageSettings = defineStore("pageSettings", {
     fileType: "mdx",
     additionalInfo: mdxDefaultTemplate,
   }),
-  //   getters: {
-  //     doubleCount: (state) => state.count * 2,
-  //   },
-  //   actions: {
-  //     increment() {
-  //       this.count++;
-  //     },
-  //   },
+  actions: {
+    updateSettings(newSettings) {
+      // use Vue's `Object.assign()` method to update the state with the new settings
+      Object.assign(this.$state, newSettings);
+    },
+    defalutValue() {
+      Object.assign(this.$state, {
+        fileName: "New Pages",
+        fileType: "mdx",
+        additionalInfo: [],
+      });
+    },
+  },
 });

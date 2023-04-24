@@ -35,6 +35,7 @@
               Affects app content.
             </div>
           </div>
+          <div class="btn" @click="clearData">New File</div>
         </tab>
         <tab name="Page" :is-disabled="pageSettings.fileType == 'md'">
           <component
@@ -139,6 +140,10 @@ export default {
           generateJsonFile(this.pageSettings, this.pageContent);
       }
     },
+    clearData() {
+      localStorage.removeItem("localPageContent");
+      localStorage.removeItem("localPageSettings");
+    },
   },
   components: { TextInput },
 };
@@ -219,23 +224,23 @@ export default {
 
     position: absolute;
     bottom: 0;
-    .btn {
-      border: 1px solid #f2f2f2;
-      padding: 1rem;
-      border-radius: 5px;
-      color: #f2f2f2;
-      text-align: center;
+  }
+  .btn {
+    border: 1px solid #f2f2f2;
+    padding: 1rem;
+    border-radius: 5px;
+    color: #f2f2f2;
+    text-align: center;
 
-      flex: 0 0 calc(30% - 4rem);
+    flex: 0 0 calc(30% - 4rem);
 
-      &:nth-child(2) {
-        flex: 0 0 calc(70% - 3.25rem);
-      }
+    &:nth-child(2) {
+      flex: 0 0 calc(70% - 3.25rem);
+    }
 
-      &:hover {
-        opacity: 0.75;
-        cursor: pointer;
-      }
+    &:hover {
+      opacity: 0.75;
+      cursor: pointer;
     }
   }
 }
