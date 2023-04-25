@@ -210,7 +210,7 @@ export default {
     const { fileType } = storeToRefs(pageSettings);
 
     return {
-      isCustomTag: false,
+      isCustomTag: this.tag.tagSettings.isCustomTag,
       attributes: {
         id: "",
         class: "",
