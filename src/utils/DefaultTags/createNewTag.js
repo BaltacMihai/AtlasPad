@@ -5,6 +5,7 @@ export default function createNewTag(fileType) {
       tagSettings: {
         isMinimized: false,
         isTagSettingsOpened: false,
+        isCustomTag: false,
       },
       tagAttributes: {
         class: "",
@@ -20,7 +21,6 @@ export default function createNewTag(fileType) {
       tagSettings: {
         isMinimized: false,
         isTagSettingsOpened: true,
-        isCustomTag: false,
       },
       tagAttributes: {
         class: "",

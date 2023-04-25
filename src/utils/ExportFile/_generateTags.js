@@ -1,5 +1,17 @@
+import renderCodeSnippetContent from "./custom/CodeSnippet";
+
 export default function generateTags(tag, depth = 0) {
   const indent = " ".repeat(depth);
+
+  if (tag.tagSettings.isCustomTag) {
+    switch (tag.tagName) {
+      case "CodeSnippet":
+        return `${indent}<${tag.tagName}${generateTagAttributesString(
+          tag.tagAttributes
+        )} content="${renderCodeSnippetContent(tag.content)}"/>\n`;
+    }
+  }
+
   switch (tag.tagType) {
     case "singleTag":
       return `${indent}<${tag.tagName}${generateTagAttributesString(
@@ -34,7 +46,7 @@ function generateTagAttributesString(tagAttributes) {
   const tagAttributesList = [];
   for (const [key, value] of Object.entries(tagAttributes)) {
     if (value && key != "custom") {
-      tagAttributesList.push(`${key}="${value}"`);
+      tagAttributesList.push(`${key}=\`${value}\``);
     }
   }
   if (tagAttributes.custom) {
