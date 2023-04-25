@@ -3,7 +3,7 @@ import exampleTest from "./utils/Example.json";
 import TagsTree from "./components/TagsTree.vue";
 import Settings from "./components/Settings.vue";
 import { usePageSettings } from "@/stores/pageSettings";
-
+import { parse, stringify } from "flatted";
 export default {
   components: {
     TagsTree,
@@ -30,11 +30,10 @@ export default {
 
     // If data exists, parse the JSON string to an object
     if (localPageContent) {
-      this.pageContent.content = JSON.parse(localPageContent);
+      this.pageContent.content = parse(localPageContent);
     }
     if (localPageSettings) {
-      console.log(JSON.parse(localPageSettings));
-      pageSettings.updateSettings(JSON.parse(localPageSettings));
+      pageSettings.updateSettings(parse(localPageSettings));
     }
 
     // Watch for changes in props and save to local storage
@@ -43,16 +42,14 @@ export default {
       ([newPageContent, newPageSettings]) => {
         localStorage.setItem(
           "localPageContent",
-          JSON.stringify(newPageContent.content)
+          stringify(newPageContent.content)
         );
 
-        localStorage.setItem(
-          "localPageSettings",
-          JSON.stringify(newPageSettings)
-        );
+        localStorage.setItem("localPageSettings", stringify(newPageSettings));
       },
       { deep: true }
     );
+
     // Get the version of the app
     try {
       const response = await fetch(this.fileUrl);
