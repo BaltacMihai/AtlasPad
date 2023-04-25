@@ -1,8 +1,8 @@
 export default function generateTags(tag, depth = 0) {
   const indent = " ".repeat(depth);
-
+  console.log(tag);
   switch (tag.tagType) {
-    case "selfClose":
+    case "singleTag":
       return `${indent}<${tag.tagName}${generateTagAttributesString(
         tag.tagAttributes
       )}/>\n`;

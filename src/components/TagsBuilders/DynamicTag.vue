@@ -238,7 +238,8 @@ export default {
       }
     },
     generateTagIcon() {
-      if (this.isCustomTag) return customTagImgSrc;
+      if (this.isCustomTag || this.tag.tagSettings.isCustomTag)
+        return customTagImgSrc;
       const type = this.tag.tagType;
       const typeObject = defaultTypeTags.types.find((t) => t.name === type);
       switch (typeObject.name) {
@@ -276,6 +277,7 @@ export default {
   methods: {
     handleIsCustomTag(value) {
       this.isCustomTag = value;
+      this.tag.tagSettings.isCustomTag = value;
     },
     changeDefaultType() {
       const name = this.tag.tagName;
