@@ -1,3 +1,2 @@
-@forward "global.scss";
-@use "components";
-@use "overwrite";
+@forward "./base/";
+@forward "./overwrite";

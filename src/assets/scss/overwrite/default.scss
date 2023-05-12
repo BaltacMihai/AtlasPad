@@ -1,0 +1,11 @@
+@use "../base" as base;
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+  font-family: "Open Sans", sans-serif;
+}
+body {
+  background-color: base.$cl-white;
+}
