@@ -3,7 +3,7 @@
     <div class="navbar_info">
       <img src="@/assets/icons/logo.svg" alt="logo" />
       <div class="infos">
-        <p class="title">{{ text }}</p>
+        <Input v-model="fileName" id="fileName" />
         <div class="type">MDX</div>
       </div>
     </div>
@@ -37,29 +37,37 @@
 </template>
 <script>
 import Button from "../atoms/Button.vue";
+import Input from "../atoms/Input.vue";
 import TooltipButton from "../molecules/TooltipButton.vue";
 
 export default {
-  components: { Button, TooltipButton },
+  components: { Button, TooltipButton, Input, Input },
   data() {
     return {
-      text: "New Document",
+      fileName: "New Document",
     };
   },
 };
 </script>
 <style lang="scss">
 nav {
+  $padding-size: 1rem;
+
   background-color: $cl-primary;
-  padding: 1rem;
+  padding: $padding-size;
 
   display: flex;
   justify-content: space-between;
 
+  // position: fixed;
+  // top: 0;
+  // left: 0;
+  // width: calc(100% - $padding-size * 2);
+
   .navbar_info {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: $padding-size;
 
     img {
       width: 50px;
@@ -68,10 +76,14 @@ nav {
       display: flex;
       flex-direction: column;
 
-      .title {
+      #fileName {
         font-size: $fs-title;
         color: $cl-white;
         font-weight: bold;
+
+        // Overwrite
+        background: transparent;
+        padding: 0;
       }
       .type {
         font-size: $fs-text;
@@ -83,7 +95,7 @@ nav {
   .navbar_actions {
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: $padding-size;
 
     .vertical-line {
       border-right: 1px solid $cl-secondary;

@@ -1,8 +1,9 @@
 <script>
 import Navbar from "./components/organisms/Navbar.vue";
+import Settings from "./components/pages/Settings.vue";
 
 export default {
-  components: { Navbar },
+  components: { Navbar, Settings },
   data() {
     return {
       name: "",
@@ -13,6 +14,7 @@ export default {
 
 <template>
   <Navbar />
+  <Settings />
 </template>
 
 <style lang="scss"></style>
