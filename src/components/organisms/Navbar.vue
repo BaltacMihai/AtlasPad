@@ -4,7 +4,7 @@
       <img src="@/assets/icons/logo.svg" alt="logo" />
       <div class="infos">
         <Input v-model="pageSettings.fileName" id="fileName" />
-        <div class="type">MDX</div>
+        <div class="type">{{ pageSettings.fileType.toUpperCase() }}</div>
       </div>
     </div>
     <div class="navbar_actions">
@@ -26,7 +26,7 @@
       </TooltipButton>
       <p class="vertical-line"></p>
 
-      <TooltipButton tooltipText="Settings" type="icon">
+      <TooltipButton tooltipText="Settings" type="icon" @click="handleSettings">
         <img src="@/assets/icons/setting.svg" alt="settingsIcon" />
       </TooltipButton>
 
@@ -43,6 +43,9 @@ import { useFileSettings } from "@/stores/FileSettings.js";
 
 export default {
   components: { Button, TooltipButton, Input, Input },
+  props: {
+    handleSettings: Function,
+  },
   data() {
     return {
       pageSettings: useFileSettings(),

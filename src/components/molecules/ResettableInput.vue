@@ -72,6 +72,10 @@ export default {
 
   position: relative;
 
+  input {
+    width: 100%;
+  }
+
   &.focused {
     margin-right: -2rem;
     input {

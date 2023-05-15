@@ -6,7 +6,8 @@ inputType="simple"
 <template>
   <div class="input-group">
     <label>{{ labelName }}</label>
-    <component :is="inputBuilder" v-model="propModel" />
+    <component :is="inputBuilder" v-model="propModel" :options="options" />
+    <p class="subtext" v-if="subtext">{{ subtext }}</p>
   </div>
 </template>
 <script>
@@ -16,6 +17,14 @@ export default {
     labelName: String,
     modelValue: String,
     inputType: String,
+    subtext: {
+      type: String,
+      required: false,
+    },
+    options: {
+      type: Array,
+      required: false,
+    },
   },
   computed: {
     inputBuilder() {
@@ -29,6 +38,10 @@ export default {
           return defineAsyncComponent(() =>
             import("./../molecules/ResettableInput.vue")
           );
+
+        case "Chip":
+        case "chip":
+          return defineAsyncComponent(() => import("./../atoms/Chips.vue"));
       }
     },
     propModel: {
@@ -49,10 +62,14 @@ export default {
   width: fit-content;
   justify-content: center;
   gap: 0.5rem;
+  width: 100%;
   label {
     font-size: $fs-text;
     color: $cl-primary;
     font-weight: bold;
+  }
+  .subtext {
+    font-size: $fs-subtext;
   }
 }
 </style>

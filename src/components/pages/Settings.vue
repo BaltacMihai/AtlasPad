@@ -1,12 +1,14 @@
 <template>
-  <div class="settings">
+  <div class="settings" v-show="isOpened">
     <div class="settings_header">
       <p class="title">Settings</p>
-      <img
-        src="@/assets/icons/close.svg"
-        alt="closing Icon"
-        class="closeIcon"
-      />
+      <Button type="icon" @click="handleSettings">
+        <img
+          src="@/assets/icons/close.svg"
+          alt="closing Icon"
+          class="closeIcon"
+        />
+      </Button>
     </div>
 
     <div class="settings_container">
@@ -15,16 +17,28 @@
         v-model="pageSettings.fileName"
         inputType="resettableInput"
       />
+      <LabeledInput
+        label-name="File format"
+        v-model="pageSettings.fileType"
+        inputType="chip"
+        subtext="*Affects app content"
+        :options="['html', 'md', 'mdx']"
+      />
     </div>
   </div>
 </template>
 <script>
+import Button from "../atoms/Button.vue";
 import ResettableInput from "../molecules/ResettableInput.vue";
 import LabeledInput from "../organisms/LabeledInput.vue";
 import { useFileSettings } from "@/stores/FileSettings.js";
 
 export default {
-  components: { ResettableInput, LabeledInput },
+  components: { ResettableInput, LabeledInput, Button },
+  props: {
+    handleSettings: Function,
+    isOpened: Boolean,
+  },
   data() {
     return {
       pageSettings: useFileSettings(),
@@ -35,7 +49,7 @@ export default {
 <style lang="scss">
 .settings {
   background-color: $cl-white;
-  width: fit-content;
+  width: 20%;
   display: flex;
   flex-direction: column;
   padding: 1rem;
@@ -59,7 +73,7 @@ export default {
   &_container {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 1.5rem;
     padding-top: 1rem;
 
     input {

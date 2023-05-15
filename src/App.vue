@@ -6,15 +6,21 @@ export default {
   components: { Navbar, Settings },
   data() {
     return {
-      name: "",
+      isSettingsOpened: true,
     };
+  },
+  methods: {
+    triggerSettings() {
+      console.log("DA");
+      this.isSettingsOpened = !this.isSettingsOpened;
+    },
   },
 };
 </script>
 
 <template>
-  <Navbar />
-  <Settings />
+  <Navbar :handleSettings="triggerSettings" />
+  <Settings :handleSettings="triggerSettings" :isOpened="isSettingsOpened" />
 </template>
 
 <style lang="scss"></style>
