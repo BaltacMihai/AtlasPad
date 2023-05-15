@@ -3,7 +3,7 @@
     <div class="navbar_info">
       <img src="@/assets/icons/logo.svg" alt="logo" />
       <div class="infos">
-        <Input v-model="fileName" id="fileName" />
+        <Input v-model="pageSettings.fileName" id="fileName" />
         <div class="type">MDX</div>
       </div>
     </div>
@@ -39,12 +39,13 @@
 import Button from "../atoms/Button.vue";
 import Input from "../atoms/Input.vue";
 import TooltipButton from "../molecules/TooltipButton.vue";
+import { useFileSettings } from "@/stores/FileSettings.js";
 
 export default {
   components: { Button, TooltipButton, Input, Input },
   data() {
     return {
-      fileName: "New Document",
+      pageSettings: useFileSettings(),
     };
   },
 };

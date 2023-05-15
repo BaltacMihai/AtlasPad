@@ -69,22 +69,19 @@ export default {
 .input-resetable {
   display: flex;
   align-items: center;
-  width: fit-content;
 
   position: relative;
-  input {
-    border: 1px solid $cl-primary;
-  }
 
   &.focused {
+    margin-right: -2rem;
     input {
       padding-right: 3rem;
+      width: calc(100% - 6.15rem);
     }
-  }
-
-  .btn {
-    position: absolute;
-    right: 1rem;
+    .btn {
+      position: absolute;
+      right: 2.5rem;
+    }
   }
 }
 </style>
