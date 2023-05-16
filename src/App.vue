@@ -16,14 +16,29 @@ export default {
             name: "div",
             isMinimized: true,
             isSettingsOptionOpened: true,
-            type: "text",
+            type: "container",
           },
           attributes: {
             class: "Class Something",
             id: "IdSomething",
             custom: "CustomData:'ceva' CUSTOM-data:'altceva'",
           },
-          content: [],
+          content: [
+            {
+              settings: {
+                name: "div",
+                isMinimized: true,
+                isSettingsOptionOpened: true,
+                type: "text",
+              },
+              attributes: {
+                class: "",
+                id: "",
+                custom: "",
+              },
+              content: [],
+            },
+          ],
         },
         {
           settings: {

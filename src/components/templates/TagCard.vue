@@ -7,9 +7,15 @@
       :settings="() => {}"
       :delete="onDelete"
     />
+
+    <div class="container">
+      <component :is="tagContent" :content="tag.content" />
+    </div>
   </div>
 </template>
 <script>
+import { defineAsyncComponent } from "vue";
+
 import TooltipButton from "../molecules/TooltipButton.vue";
 import TagNavbar from "../organisms/TagNavbar.vue";
 
@@ -23,6 +29,20 @@ export default {
       this.$emit("delete", this.tag);
     },
   },
+  computed: {
+    tagContent() {
+      switch (this.tag.settings.type) {
+        case "container":
+          return defineAsyncComponent(() =>
+            import("@/components/pages/TagsEditor.vue")
+          );
+        case "text":
+          return defineAsyncComponent(() =>
+            import("@/components/atoms/Text.vue")
+          );
+      }
+    },
+  },
 };
 </script>
 <style lang="scss">
@@ -31,37 +51,5 @@ export default {
   flex-direction: column;
   border-radius: 10px;
   box-shadow: 0px 20px 20px rgba(134, 158, 253, 0.2);
-
-  &_header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 1rem;
-
-    border-bottom: 1px solid $cl-grey;
-
-    .info {
-      .title {
-        color: $cl-primary;
-        font-weight: bold;
-        font-size: $fs-title;
-        text-transform: uppercase;
-      }
-      .subtitle {
-        color: $cl-secondary;
-        font-size: $fs-text;
-
-        span {
-          font-weight: bold;
-        }
-      }
-    }
-    .actions {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 1rem;
-    }
-  }
 }
 </style>

@@ -7,8 +7,9 @@
 </template>
 <script>
 import TagCard from "@/components/templates/TagCard.vue";
+import draggable from "vuedraggable";
 export default {
-  components: { TagCard },
+  components: { TagCard, draggable },
   props: {
     content: Array,
   },

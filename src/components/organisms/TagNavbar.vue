@@ -64,4 +64,36 @@ export default {
   },
 };
 </script>
-<style lang=""></style>
+<style lang="scss">
+.tag-card_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+
+  border-bottom: 1px solid $cl-grey;
+
+  .info {
+    .title {
+      color: $cl-primary;
+      font-weight: bold;
+      font-size: $fs-title;
+      text-transform: uppercase;
+    }
+    .subtitle {
+      color: $cl-secondary;
+      font-size: $fs-text;
+
+      span {
+        font-weight: bold;
+      }
+    }
+  }
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
+}
+</style>
