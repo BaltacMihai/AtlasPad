@@ -20,13 +20,13 @@
   </div>
 </template>
 <script>
+import handleVModel from "@/mixins/handleVModel";
 import Button from "../atoms/Button.vue";
 import Input from "../atoms/Input.vue";
 export default {
   components: { Button, Input },
-  props: {
-    modelValue: String,
-  },
+  mixins: [handleVModel],
+
   data() {
     return {
       isDeleteIconVisible: false,
@@ -51,16 +51,6 @@ export default {
     mouseOut() {
       console.log("MOUSE OUT");
       this.isMouseOver = false;
-    },
-  },
-  computed: {
-    propModel: {
-      get() {
-        return this.modelValue;
-      },
-      set(value) {
-        this.$emit("update:modelValue", value);
-      },
     },
   },
 };

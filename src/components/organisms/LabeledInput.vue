@@ -12,10 +12,11 @@ inputType="simple"
 </template>
 <script>
 import { defineAsyncComponent } from "vue";
+import handleVModel from "@/mixins/handleVModel";
 export default {
+  mixins: [handleVModel],
   props: {
     labelName: String,
-    modelValue: String,
     inputType: String,
     subtext: {
       type: String,
@@ -43,14 +44,6 @@ export default {
         case "chip":
           return defineAsyncComponent(() => import("./../atoms/Chips.vue"));
       }
-    },
-    propModel: {
-      get() {
-        return this.modelValue;
-      },
-      set(value) {
-        this.$emit("update:modelValue", value);
-      },
     },
   },
 };

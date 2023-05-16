@@ -32,24 +32,15 @@
   </div>
 </template>
 <script>
+import handleVModel from "@/mixins/handleVModel";
 import Button from "../atoms/Button.vue";
 import Input from "../atoms/Input.vue";
 
 export default {
   components: { Input, Button },
+  mixins: [handleVModel],
   props: {
-    modelValue: String,
     options: Array,
-  },
-  computed: {
-    propModel: {
-      get() {
-        return this.modelValue;
-      },
-      set(value) {
-        this.$emit("update:modelValue", value);
-      },
-    },
   },
   data() {
     return {
