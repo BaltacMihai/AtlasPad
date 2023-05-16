@@ -40,6 +40,10 @@ export default {
           return defineAsyncComponent(() =>
             import("@/components/atoms/Textarea.vue")
           );
+        case "media":
+          return defineAsyncComponent(() =>
+            import("@/components/atoms/Image.vue")
+          );
       }
     },
   },

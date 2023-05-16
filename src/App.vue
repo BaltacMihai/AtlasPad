@@ -54,6 +54,21 @@ export default {
           },
           content: "Lalalalal",
         },
+        {
+          settings: {
+            name: "img",
+            isMinimized: true,
+            isSettingsOptionOpened: true,
+            type: "media",
+          },
+          attributes: {
+            class: "",
+            id: "",
+            custom: "",
+          },
+          content:
+            "https://thumbs.dreamstime.com/b/beautiful-rain-forest-ang-ka-nature-trail-36703721.jpg",
+        },
       ],
     };
   },
