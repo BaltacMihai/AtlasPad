@@ -1,0 +1,67 @@
+<template>
+  <div class="tag-card_header">
+    <div class="info">
+      <p class="title">{{ name }}</p>
+      <p class="subtitle" v-html="subtitle"></p>
+    </div>
+    <div class="actions">
+      <TooltipButton tooltipText="Minimize the tag" type="icon">
+        <img src="@/assets/icons/maximize.svg" alt="textIcon" />
+      </TooltipButton>
+      <TooltipButton tooltipText="Tag Settings" type="icon">
+        <img src="@/assets/icons/setting.svg" alt="textIcon" />
+      </TooltipButton>
+      <TooltipButton tooltipText="DeleteTags" type="icon" @click="deleteTag">
+        <img src="@/assets/icons/trash.svg" alt="textIcon" />
+      </TooltipButton>
+    </div>
+  </div>
+</template>
+<script>
+import TooltipButton from "../molecules/TooltipButton.vue";
+export default {
+  components: { TooltipButton },
+  props: {
+    name: String,
+    attributes: Object,
+    minim: Function,
+    settings: Function,
+    delete: Function,
+  },
+  computed: {
+    subtitle() {
+      let result = "";
+
+      if (this.attributes.id) {
+        result += `<span>ID</span>: ${this.attributes.id} <span>|</span> `;
+      }
+
+      if (this.attributes.class) {
+        result += `<span>Class</span>: ${this.attributes.class} `;
+      }
+
+      if (this.attributes.custom) {
+        const customAttributes = this.attributes.custom.split(" ");
+
+        customAttributes.forEach((attribute) => {
+          result += ` <span>|</span> `;
+          const [key, value] = attribute.split("=");
+          if (key && value) result += `<span>${key}</span>: ${value} `;
+          else {
+            const [key, value] = attribute.split(":");
+            result += `<span>${key}</span>: ${value} `;
+          }
+        });
+      }
+
+      return result.trim();
+    },
+  },
+  methods: {
+    deleteTag() {
+      this.delete();
+    },
+  },
+};
+</script>
+<style lang=""></style>

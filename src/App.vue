@@ -3,13 +3,43 @@ import Switch from "./components/atoms/Switch.vue";
 import Select from "./components/molecules/Select.vue";
 import Navbar from "./components/organisms/Navbar.vue";
 import Settings from "./components/pages/Settings.vue";
+import TagsEditor from "./components/pages/TagsEditor.vue";
 
 export default {
-  components: { Navbar, Settings, Select, Switch },
+  components: { Navbar, Settings, Select, Switch, TagsEditor },
   data() {
     return {
       isSettingsOpened: false,
-      vmod: "Regular",
+      vmod: [
+        {
+          settings: {
+            name: "div",
+            isMinimized: true,
+            isSettingsOptionOpened: true,
+            type: "text",
+          },
+          attributes: {
+            class: "Class Something",
+            id: "IdSomething",
+            custom: "CustomData:'ceva' CUSTOM-data:'altceva'",
+          },
+          content: [],
+        },
+        {
+          settings: {
+            name: "div",
+            isMinimized: true,
+            isSettingsOptionOpened: true,
+            type: "text",
+          },
+          attributes: {
+            class: "",
+            id: "",
+            custom: "",
+          },
+          content: [],
+        },
+      ],
     };
   },
   methods: {
@@ -23,6 +53,7 @@ export default {
 <template>
   <Navbar :handleSettings="triggerSettings" />
   <Settings :handleSettings="triggerSettings" :isOpened="isSettingsOpened" />
+  <TagsEditor :content="vmod" />
 </template>
 
 <style lang="scss"></style>
