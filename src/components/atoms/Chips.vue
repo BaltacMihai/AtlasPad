@@ -57,7 +57,6 @@ export default {
     gap: 0.5rem;
 
     &:hover {
-      background-color: $cl-secondary;
       cursor: pointer;
       background-color: lighten($cl-secondary, 10);
     }

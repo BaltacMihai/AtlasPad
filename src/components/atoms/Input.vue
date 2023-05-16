@@ -1,7 +1,12 @@
 <!-- <Input v-model="name" id="name" /> -->
 
 <template>
-  <input class="input" :value="modelValue" @input="handleInput" />
+  <input
+    class="input"
+    :value="modelValue"
+    @input="handleInput"
+    :readonly="readonly"
+  />
 </template>
 <script>
 export default {
@@ -13,6 +18,10 @@ export default {
     modelValue: {
       type: String,
       required: true,
+    },
+    readonly: {
+      type: Boolean,
+      required: false,
     },
   },
   methods: {
