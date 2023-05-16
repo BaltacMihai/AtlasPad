@@ -1,11 +1,11 @@
 <template>
   <div class="tooltip" @mouseenter="showTooltip" @mouseleave="hideTooltip">
+    <!-- Tooltip content -->
+    <p v-show="isTooltipVisible" class="tooltip-content">{{ text }}</p>
     <span class="tooltip-trigger">
       <!-- Element triggering the tooltip, e.g., a button or an icon -->
       <slot></slot>
     </span>
-    <!-- Tooltip content -->
-    <p v-show="isTooltipVisible" class="tooltip-content">{{ text }}</p>
   </div>
 </template>
 
@@ -59,5 +59,8 @@ export default {
   margin: 2rem 0px;
   font-size: $fs-subtext;
   letter-spacing: 0.75px;
+
+  right: 0;
+  top: 0;
 }
 </style>

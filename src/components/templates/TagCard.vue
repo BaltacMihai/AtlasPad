@@ -52,10 +52,6 @@ export default {
   border-radius: 10px;
   box-shadow: 0px 20px 20px rgba(134, 158, 253, 0.2);
 
-  &[data-draggable="true"] {
-    cursor: grab;
-  }
-
   &[draggable="true"] {
     cursor: grabbing !important;
   }

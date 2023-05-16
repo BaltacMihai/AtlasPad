@@ -1,10 +1,10 @@
 <template>
-  <p>{{ content }}</p>
+  <p>{{ modelValue }}</p>
 </template>
 <script>
 export default {
   props: {
-    content: String,
+    modelValue: String,
   },
 };
 </script>

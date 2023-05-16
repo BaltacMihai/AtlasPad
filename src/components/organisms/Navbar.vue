@@ -63,10 +63,8 @@ nav {
   display: flex;
   justify-content: space-between;
 
-  // position: fixed;
-  // top: 0;
-  // left: 0;
-  // width: calc(100% - $padding-size * 2);
+  position: sticky;
+  top: 0;
 
   .navbar_info {
     display: flex;

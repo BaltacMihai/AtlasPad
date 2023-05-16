@@ -11,7 +11,7 @@
       <TooltipButton tooltipText="Tag Settings" type="icon">
         <img src="@/assets/icons/setting.svg" alt="textIcon" />
       </TooltipButton>
-      <TooltipButton tooltipText="DeleteTags" type="icon" @click="deleteTag">
+      <TooltipButton tooltipText="Delete Tag" type="icon" @click="deleteTag">
         <img src="@/assets/icons/trash.svg" alt="textIcon" />
       </TooltipButton>
     </div>
@@ -72,7 +72,12 @@ export default {
   padding: 1rem;
 
   border-bottom: 1px solid $cl-grey;
+  background-color: #e8f2fd;
 
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+
+  cursor: grab;
   .info {
     .title {
       color: $cl-primary;
@@ -90,10 +95,15 @@ export default {
     }
   }
   .actions {
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     gap: 1rem;
+  }
+  &:hover {
+    .actions {
+      display: flex;
+    }
   }
 }
 </style>
