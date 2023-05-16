@@ -1,24 +1,41 @@
 <template>
-  <div class="tags-container">
-    <template v-for="tag in content">
-      <TagCard :tag="tag" @delete="deleteTag" />
+  <draggable
+    v-model="contentModel"
+    :key="contentModel.map((c) => c.id)"
+    :itemKey="(item) => item.id"
+    group="tags"
+    class="tags-container"
+  >
+    <template v-slot:item="{ element }">
+      <TagCard :tag="element" @delete="deleteTag" />
     </template>
-  </div>
+  </draggable>
 </template>
 <script>
 import TagCard from "@/components/templates/TagCard.vue";
 import draggable from "vuedraggable";
 export default {
   components: { TagCard, draggable },
+
   props: {
-    content: Array,
+    modelValue: Array,
+  },
+  computed: {
+    contentModel: {
+      get() {
+        return this.modelValue;
+      },
+      set(value) {
+        this.$emit("update:modelValue", value);
+      },
+    },
   },
   methods: {
     deleteTag(tag) {
-      const index = this.content.indexOf(tag);
+      const index = this.modelValue.indexOf(tag);
 
       if (index !== -1) {
-        this.content.splice(index, 1);
+        this.modelValue.splice(index, 1);
       }
     },
   },
@@ -28,7 +45,7 @@ export default {
 .tags-container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
   padding: 1rem;
 }
 </style>

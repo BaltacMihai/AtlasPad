@@ -13,7 +13,7 @@ export default {
       vmod: [
         {
           settings: {
-            name: "div",
+            name: "test",
             isMinimized: true,
             isSettingsOptionOpened: true,
             type: "container",
@@ -42,7 +42,7 @@ export default {
         },
         {
           settings: {
-            name: "div",
+            name: "h1",
             isMinimized: true,
             isSettingsOptionOpened: true,
             type: "text",
@@ -52,7 +52,7 @@ export default {
             id: "",
             custom: "",
           },
-          content: [],
+          content: "Lalalalal",
         },
       ],
     };
@@ -68,7 +68,7 @@ export default {
 <template>
   <Navbar :handleSettings="triggerSettings" />
   <Settings :handleSettings="triggerSettings" :isOpened="isSettingsOpened" />
-  <TagsEditor :content="vmod" />
+  <TagsEditor v-model="vmod" />
 </template>
 
 <style lang="scss"></style>
