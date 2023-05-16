@@ -1,3 +1,5 @@
+<!-- <Select v-model="vmod" :options="['Option 1', 'Option 2', 'Option 3']" /> -->
+
 <template>
   <div class="select">
     <div class="select-input" @click="triggerDropdown">

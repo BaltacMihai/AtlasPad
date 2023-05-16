@@ -1,14 +1,15 @@
 <script>
+import Switch from "./components/atoms/Switch.vue";
 import Select from "./components/molecules/Select.vue";
 import Navbar from "./components/organisms/Navbar.vue";
 import Settings from "./components/pages/Settings.vue";
 
 export default {
-  components: { Navbar, Settings, Select },
+  components: { Navbar, Settings, Select, Switch },
   data() {
     return {
       isSettingsOpened: false,
-      vmod: "Option 2",
+      vmod: "Regular",
     };
   },
   methods: {
@@ -22,7 +23,6 @@ export default {
 <template>
   <Navbar :handleSettings="triggerSettings" />
   <Settings :handleSettings="triggerSettings" :isOpened="isSettingsOpened" />
-  <Select v-model="vmod" :options="['Option 1', 'Option 2', 'Option 3']" />
 </template>
 
 <style lang="scss"></style>
