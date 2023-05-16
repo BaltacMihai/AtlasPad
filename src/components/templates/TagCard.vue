@@ -38,7 +38,7 @@ export default {
           );
         case "text":
           return defineAsyncComponent(() =>
-            import("@/components/atoms/Text.vue")
+            import("@/components/atoms/Textarea.vue")
           );
       }
     },
@@ -54,6 +54,19 @@ export default {
 
   &[draggable="true"] {
     cursor: grabbing !important;
+  }
+
+  textarea {
+    width: -webkit-fill-available;
+    padding: 1rem;
+    font-size: $fs-text;
+    background: transparent;
+    border: none;
+
+    &:focus-visible {
+      border: none;
+      outline: none;
+    }
   }
 }
 </style>

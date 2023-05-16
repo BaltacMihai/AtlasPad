@@ -1,8 +1,11 @@
 <template>
   <div class="tag-card_header">
     <div class="info">
-      <p class="title">{{ name }}</p>
-      <p class="subtitle" v-html="subtitle"></p>
+      <!-- <img :src="generateTagIcon" alt="containerIcon" /> -->
+      <div class="description">
+        <p class="title">{{ name }}</p>
+        <p class="subtitle" v-html="subtitle"></p>
+      </div>
     </div>
     <div class="actions">
       <TooltipButton tooltipText="Minimize the tag" type="icon">
@@ -79,18 +82,22 @@ export default {
 
   cursor: grab;
   .info {
-    .title {
-      color: $cl-primary;
-      font-weight: bold;
-      font-size: $fs-title;
-      text-transform: uppercase;
-    }
-    .subtitle {
-      color: $cl-secondary;
-      font-size: $fs-text;
-
-      span {
+    display: flex;
+    align-items: center;
+    .description {
+      .title {
+        color: $cl-primary;
         font-weight: bold;
+        font-size: $fs-title;
+        text-transform: uppercase;
+      }
+      .subtitle {
+        color: $cl-secondary;
+        font-size: $fs-text;
+
+        span {
+          font-weight: bold;
+        }
       }
     }
   }

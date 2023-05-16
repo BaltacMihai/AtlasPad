@@ -36,7 +36,7 @@ export default {
                 id: "",
                 custom: "",
               },
-              content: [],
+              content: "test",
             },
           ],
         },
