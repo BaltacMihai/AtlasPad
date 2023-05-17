@@ -81,6 +81,14 @@ export default {
       if (tagContentType) {
         this.tag.settings.name = newValue;
         this.tag.settings.contentType = tagContentType.type;
+        switch (tagContentType.type) {
+          case "container":
+            this.tag.content = [];
+            break;
+          default:
+            this.tag.content = `"${this.tag.content}"`;
+            break;
+        }
       }
     },
   },
@@ -88,7 +96,7 @@ export default {
 </script>
 <style lang="scss">
 .tag_settings {
-  border-top: 1px solid $cl-primary;
+  // border-top: 1px solid $cl-primary;
 
   .tabs-component {
     display: flex;

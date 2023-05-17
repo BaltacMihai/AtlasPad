@@ -48,6 +48,10 @@ export default {
 </script>
 <style lang="scss">
 .settings {
+  height: fit-content;
+  position: sticky;
+  top: 10%;
+
   background-color: $cl-white;
   width: 20%;
   display: flex;
