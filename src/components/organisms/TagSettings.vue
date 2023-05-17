@@ -12,28 +12,9 @@
         <template v-if="tag.settings.type == 'Regular'">
           <LabeledInput
             label-name="Name"
-            v-model="tag.settings.name"
+            v-model="tagName"
             inputType="select"
-            :options="[
-              'img',
-              'h1',
-              'h2',
-              'h3',
-              'h4',
-              'h5',
-              'h6',
-              'p',
-              'i',
-              'b',
-              'a',
-              'div',
-              'section',
-              'nav',
-              'main',
-              'footer',
-              'br',
-              'hr',
-            ]"
+            :options="defaultTagsList"
           />
         </template>
         <template v-else>
@@ -73,11 +54,36 @@
 <script>
 import LabeledInput from "./LabeledInput.vue";
 
+import getDefaultTags from "@/data/TagsPredefined.js";
+import { useFileSettings } from "@/stores/FileSettings.js";
+
 export default {
   props: {
     tag: Object,
   },
   components: { LabeledInput },
+  data() {
+    return {
+      tagName: this.tag.settings.name,
+      pageSettings: useFileSettings(),
+    };
+  },
+  computed: {
+    defaultTagsList() {
+      const defaultTags = getDefaultTags(this.pageSettings.fileType);
+      return defaultTags?.map((tag) => tag.name);
+    },
+  },
+  watch: {
+    tagName(newValue, oldValue) {
+      const defaultTags = getDefaultTags(this.pageSettings.fileType);
+      const tagContentType = defaultTags.find((t) => t.name === newValue);
+      if (tagContentType) {
+        this.tag.settings.name = newValue;
+        this.tag.settings.contentType = tagContentType.type;
+      }
+    },
+  },
 };
 </script>
 <style lang="scss">
