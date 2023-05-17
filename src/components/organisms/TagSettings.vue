@@ -80,14 +80,17 @@ export default {
       const tagContentType = defaultTags.find((t) => t.name === newValue);
       if (tagContentType) {
         this.tag.settings.name = newValue;
-        this.tag.settings.contentType = tagContentType.type;
-        switch (tagContentType.type) {
-          case "container":
-            this.tag.content = [];
-            break;
-          default:
-            this.tag.content = `"${this.tag.content}"`;
-            break;
+
+        if (tagContentType.type != this.tag.settings.contentType) {
+          this.tag.settings.contentType = tagContentType.type;
+          switch (tagContentType.type) {
+            case "container":
+              this.tag.content = [];
+              break;
+            default:
+              this.tag.content = `"${this.tag.content}"`;
+              break;
+          }
         }
       }
     },
