@@ -43,6 +43,16 @@ export default {
         case "Chip":
         case "chip":
           return defineAsyncComponent(() => import("./../atoms/Chips.vue"));
+
+        case "Switch":
+        case "switch":
+          return defineAsyncComponent(() => import("./../atoms/Switch.vue"));
+
+        case "Select":
+        case "select":
+          return defineAsyncComponent(() =>
+            import("./../molecules/Select.vue")
+          );
       }
     },
   },

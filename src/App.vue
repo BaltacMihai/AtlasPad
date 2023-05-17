@@ -14,9 +14,10 @@ export default {
         {
           settings: {
             name: "test",
-            isMinimized: true,
+            isMinimized: false,
             isSettingsOptionOpened: true,
-            type: "container",
+            type: "Regular",
+            contentType: "container",
           },
           attributes: {
             class: "Class Something",
@@ -29,7 +30,8 @@ export default {
                 name: "div",
                 isMinimized: true,
                 isSettingsOptionOpened: true,
-                type: "text",
+                type: "Regular",
+                contentType: "text",
               },
               attributes: {
                 class: "",
@@ -45,7 +47,8 @@ export default {
             name: "h1",
             isMinimized: true,
             isSettingsOptionOpened: true,
-            type: "text",
+            type: "Regular",
+            contentType: "text",
           },
           attributes: {
             class: "",
@@ -59,7 +62,8 @@ export default {
             name: "img",
             isMinimized: true,
             isSettingsOptionOpened: true,
-            type: "media",
+            type: "Regular",
+            contentType: "media",
           },
           attributes: {
             class: "",

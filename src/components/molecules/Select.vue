@@ -86,6 +86,12 @@ export default {
   }
 
   &-content {
+    position: absolute;
+    top: 2.5rem;
+    background: $cl-white;
+    width: 100%;
+    z-index: 2;
+
     margin-top: 0.5rem;
     border: 1px solid $cl-primary;
     border-radius: 10px;

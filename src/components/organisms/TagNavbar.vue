@@ -93,7 +93,6 @@ export default {
   justify-content: space-between;
   padding: 1rem;
 
-  border-bottom: 1px solid $cl-grey;
   background-color: #e8f2fd;
 
   border-top-left-radius: 10px;

@@ -12,6 +12,7 @@
       :delete="onDelete"
       :isMinimized="tag.settings.isMinimized"
     />
+    <TagSettings :tag="tag" />
 
     <div class="container" v-show="!tag.settings.isMinimized">
       <component :is="tagContent" v-model="tag.content" />
@@ -23,12 +24,13 @@ import { defineAsyncComponent } from "vue";
 
 import TooltipButton from "../molecules/TooltipButton.vue";
 import TagNavbar from "../organisms/TagNavbar.vue";
+import TagSettings from "../organisms/TagSettings.vue";
 
 export default {
   props: {
     tag: Object,
   },
-  components: { TooltipButton, TagNavbar },
+  components: { TooltipButton, TagNavbar, TagSettings },
   methods: {
     onDelete() {
       this.$emit("delete", this.tag);
@@ -36,7 +38,7 @@ export default {
   },
   computed: {
     tagContent() {
-      switch (this.tag.settings.type) {
+      switch (this.tag.settings.contentType) {
         case "container":
           return defineAsyncComponent(() =>
             import("@/components/pages/TagsEditor.vue")

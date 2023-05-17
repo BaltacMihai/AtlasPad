@@ -66,6 +66,8 @@ nav {
   position: sticky;
   top: 0;
 
+  z-index: 999;
+
   .navbar_info {
     display: flex;
     align-items: center;
