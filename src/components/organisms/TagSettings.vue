@@ -15,6 +15,7 @@
             v-model="tagName"
             inputType="select"
             :options="defaultTagsList"
+            subtext="*Affects tag's content"
           />
         </template>
         <template v-else>
@@ -28,6 +29,7 @@
             v-model="tag.settings.contentType"
             inputType="select"
             :options="['media', 'text', 'link', 'container', 'singleTag']"
+            subtext="*Affects tag's content"
           />
         </template>
       </tab>
@@ -133,7 +135,7 @@ export default {
 
       .tabs-component-panel {
         display: flex;
-        align-items: center;
+        align-items: baseline;
         gap: 1rem;
         .input-group {
           width: auto;

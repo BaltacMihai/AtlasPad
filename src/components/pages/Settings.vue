@@ -21,7 +21,7 @@
         label-name="File format"
         v-model="pageSettings.fileType"
         inputType="chip"
-        subtext="*Affects app content"
+        subtext="*Affects app's content"
         :options="['html', 'md', 'mdx']"
       />
     </div>
