@@ -86,8 +86,17 @@ export default {
 
 <template>
   <Navbar :handleSettings="triggerSettings" />
-  <Settings :handleSettings="triggerSettings" :isOpened="isSettingsOpened" />
-  <TagsEditor v-model="vmod" />
+  <div class="app-content">
+    <TagsEditor v-model="vmod" class="right" />
+    <Settings :handleSettings="triggerSettings" :isOpened="isSettingsOpened" />
+  </div>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+.app-content {
+  display: flex;
+  .right {
+    width: -webkit-fill-available;
+  }
+}
+</style>

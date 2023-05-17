@@ -8,11 +8,17 @@
           tag.settings.isMinimized = !tag.settings.isMinimized;
         }
       "
-      :settings="() => {}"
+      :settings="
+        () => {
+          tag.settings.isSettingsOptionOpened =
+            !tag.settings.isSettingsOptionOpened;
+        }
+      "
       :delete="onDelete"
       :isMinimized="tag.settings.isMinimized"
+      @dblclick="openTag"
     />
-    <TagSettings :tag="tag" />
+    <TagSettings :tag="tag" v-show="tag.settings.isSettingsOptionOpened" />
 
     <div class="container" v-show="!tag.settings.isMinimized">
       <component :is="tagContent" v-model="tag.content" />
@@ -34,6 +40,18 @@ export default {
   methods: {
     onDelete() {
       this.$emit("delete", this.tag);
+    },
+    openTag() {
+      if (
+        this.tag.settings.isMinimized == true &&
+        this.tag.settings.isSettingsOptionOpened == false
+      ) {
+        this.tag.settings.isMinimized = false;
+        this.tag.settings.isSettingsOptionOpened = true;
+      } else {
+        this.tag.settings.isMinimized = true;
+        this.tag.settings.isSettingsOptionOpened = false;
+      }
     },
   },
   computed: {

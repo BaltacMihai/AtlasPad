@@ -9,7 +9,7 @@
     </div>
     <div class="actions">
       <TooltipButton
-        tooltipText="Maximize the tag"
+        tooltipText="Expand Content"
         type="icon"
         @click="minimTag"
         v-if="isMinimized"
@@ -18,7 +18,7 @@
       </TooltipButton>
 
       <TooltipButton
-        tooltipText="Minimize the tag"
+        tooltipText="Collapse Content"
         type="icon"
         @click="minimTag"
         v-else
@@ -26,8 +26,12 @@
         <img src="@/assets/icons/minimized.svg" alt="textIcon" />
       </TooltipButton>
 
-      <TooltipButton tooltipText="Tag Settings" type="icon">
-        <img src="@/assets/icons/setting.svg" alt="textIcon" />
+      <TooltipButton
+        tooltipText="Tag Settings"
+        type="icon"
+        @click="triggerSettings"
+      >
+        <img src="@/assets/icons/setting-2.svg" alt="textIcon" />
       </TooltipButton>
       <TooltipButton tooltipText="Delete Tag" type="icon" @click="deleteTag">
         <img src="@/assets/icons/trash.svg" alt="textIcon" />
@@ -82,6 +86,9 @@ export default {
     },
     minimTag() {
       this.minim();
+    },
+    triggerSettings() {
+      this.settings();
     },
   },
 };

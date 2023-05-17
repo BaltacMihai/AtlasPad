@@ -88,7 +88,6 @@ export default {
 </script>
 <style lang="scss">
 .tag_settings {
-  border-bottom: 1px solid $cl-primary;
   border-top: 1px solid $cl-primary;
 
   .tabs-component {
