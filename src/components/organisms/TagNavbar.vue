@@ -8,9 +8,24 @@
       </div>
     </div>
     <div class="actions">
-      <TooltipButton tooltipText="Minimize the tag" type="icon">
+      <TooltipButton
+        tooltipText="Maximize the tag"
+        type="icon"
+        @click="minimTag"
+        v-if="isMinimized"
+      >
         <img src="@/assets/icons/maximize.svg" alt="textIcon" />
       </TooltipButton>
+
+      <TooltipButton
+        tooltipText="Minimize the tag"
+        type="icon"
+        @click="minimTag"
+        v-else
+      >
+        <img src="@/assets/icons/minimized.svg" alt="textIcon" />
+      </TooltipButton>
+
       <TooltipButton tooltipText="Tag Settings" type="icon">
         <img src="@/assets/icons/setting.svg" alt="textIcon" />
       </TooltipButton>
@@ -28,6 +43,7 @@ export default {
     name: String,
     attributes: Object,
     minim: Function,
+    isMinimized: Boolean,
     settings: Function,
     delete: Function,
   },
@@ -64,6 +80,9 @@ export default {
     deleteTag() {
       this.delete();
     },
+    minimTag() {
+      this.minim();
+    },
   },
 };
 </script>
@@ -89,7 +108,7 @@ export default {
         color: $cl-primary;
         font-weight: bold;
         font-size: $fs-title;
-        text-transform: uppercase;
+        text-transform: capitalize;
       }
       .subtitle {
         color: $cl-secondary;

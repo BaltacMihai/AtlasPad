@@ -1,14 +1,19 @@
 <template>
-  <div class="tag-card">
+  <div class="tag-card" :class="{ minimized: tag.settings.isMinimized }">
     <TagNavbar
       :name="tag.settings.name"
       :attributes="tag.attributes"
-      :mini="() => {}"
+      :minim="
+        () => {
+          tag.settings.isMinimized = !tag.settings.isMinimized;
+        }
+      "
       :settings="() => {}"
       :delete="onDelete"
+      :isMinimized="tag.settings.isMinimized"
     />
 
-    <div class="container">
+    <div class="container" v-show="!tag.settings.isMinimized">
       <component :is="tagContent" v-model="tag.content" />
     </div>
   </div>
