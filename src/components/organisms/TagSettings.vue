@@ -144,8 +144,12 @@ export default {
         .select {
           width: 217px;
           &-content {
-            max-height: 25vh;
-            overflow: auto;
+            overflow: hidden;
+            .scrollable {
+              max-height: 25vh;
+
+              overflow: auto;
+            }
           }
         }
 

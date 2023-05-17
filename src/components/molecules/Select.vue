@@ -1,7 +1,7 @@
 <!-- <Select v-model="vmod" :options="['Option 1', 'Option 2', 'Option 3']" /> -->
 
 <template>
-  <div class="select">
+  <div class="select" ref="scrollContainer">
     <div class="select-input" @click="triggerDropdown">
       <Input v-model="propModel" readonly />
       <Button type="icon" v-if="!isDropdownOpened">
@@ -13,19 +13,21 @@
     </div>
 
     <div class="select-content" v-show="isDropdownOpened">
-      <template v-for="option in options">
-        <div
-          class="item"
-          @click="selectOption"
-          :data-option="option"
-          :class="{ active: modelValue == option }"
-        >
-          {{ option }}
-          <template v-if="modelValue == option">
-            <img src="@/assets/icons/selected.svg" alt="" />
-          </template>
-        </div>
-      </template>
+      <div class="scrollable">
+        <template v-for="option in options">
+          <div
+            class="item"
+            @click="selectOption"
+            :data-option="option"
+            :class="{ active: modelValue == option }"
+          >
+            {{ option }}
+            <template v-if="modelValue == option">
+              <img src="@/assets/icons/selected.svg" alt="" />
+            </template>
+          </div>
+        </template>
+      </div>
     </div>
 
     <!-- dropdown-active.svg selected-box.svg -->
@@ -47,14 +49,48 @@ export default {
       isDropdownOpened: false,
     };
   },
+
   methods: {
     triggerDropdown() {
       this.isDropdownOpened = !this.isDropdownOpened;
+      this.$nextTick(() => {
+        this.scrollToSelected();
+      });
     },
     selectOption(event) {
       this.$emit("update:modelValue", event.target.dataset.option);
       this.isDropdownOpened = !this.isDropdownOpened;
     },
+    scrollToSelected() {
+      const selectedElement =
+        this.$refs.scrollContainer.querySelector(".active");
+
+      if (selectedElement) {
+        selectedElement.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "start",
+          preventScroll: true,
+        });
+      }
+    },
+    handleClickOutside(event) {
+      // Close the dropdown if the clicked element is outside of the dropdown component
+      if (
+        this.$refs.scrollContainer &&
+        !this.$refs.scrollContainer.contains(event.target)
+      ) {
+        this.isDropdownOpened = false;
+      }
+    },
+  },
+  mounted() {
+    // Add a click event listener to the document
+    document.addEventListener("click", this.handleClickOutside);
+  },
+  beforeUnmount() {
+    // Clean up the event listener when the component is unmounted
+    document.removeEventListener("click", this.handleClickOutside);
   },
 };
 </script>
@@ -99,6 +135,20 @@ export default {
     display: flex;
     flex-direction: column;
 
+    .scrollable {
+      &::-webkit-scrollbar {
+        width: 3px;
+        border-radius: 10px;
+
+        &-track {
+          background: #aabbff;
+        }
+        &-thumb {
+          background: $cl-primary;
+        }
+      }
+    }
+
     .item {
       display: flex;
       align-items: center;
@@ -107,27 +157,10 @@ export default {
 
       &.active {
         background-color: $cl-secondary;
-        &:first-child {
-          border-top-left-radius: 10px;
-          border-top-right-radius: 10px;
-        }
-        &:last-child {
-          border-bottom-left-radius: 10px;
-          border-bottom-right-radius: 10px;
-        }
       }
       &:hover {
         background-color: lighten($cl-secondary, 10);
         cursor: pointer;
-
-        &:first-child {
-          border-top-left-radius: 10px;
-          border-top-right-radius: 10px;
-        }
-        &:last-child {
-          border-bottom-left-radius: 10px;
-          border-bottom-right-radius: 10px;
-        }
       }
     }
   }

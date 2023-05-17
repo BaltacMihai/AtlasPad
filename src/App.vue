@@ -13,7 +13,7 @@ export default {
       vmod: [
         {
           settings: {
-            name: "test",
+            name: "div",
             isMinimized: false,
             isSettingsOptionOpened: true,
             type: "Regular",
