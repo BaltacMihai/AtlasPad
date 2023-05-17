@@ -16,6 +16,8 @@
       "
       :delete="onDelete"
       :isMinimized="tag.settings.isMinimized"
+      :isCustomTag="tag.settings.type == 'Custom'"
+      :tagType="tag.settings.contentType"
       @dblclick="openTag"
     />
     <TagSettings :tag="tag" v-show="tag.settings.isSettingsOptionOpened" />

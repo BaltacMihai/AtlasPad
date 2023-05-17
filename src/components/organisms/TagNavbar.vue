@@ -1,7 +1,7 @@
 <template>
   <div class="tag-card_header">
     <div class="info">
-      <!-- <img :src="generateTagIcon" alt="containerIcon" /> -->
+      <TagIconSelector :isCustomTag="isCustomTag" :tagType="tagType" />
       <div class="description">
         <p class="title">{{ name }}</p>
         <p class="subtitle" v-html="subtitle"></p>
@@ -40,9 +40,10 @@
   </div>
 </template>
 <script>
+import TagIconSelector from "../molecules/TagIconSelector.vue";
 import TooltipButton from "../molecules/TooltipButton.vue";
 export default {
-  components: { TooltipButton },
+  components: { TooltipButton, TagIconSelector },
   props: {
     name: String,
     attributes: Object,
@@ -50,6 +51,8 @@ export default {
     isMinimized: Boolean,
     settings: Function,
     delete: Function,
+    isCustomTag: Boolean,
+    tagType: String,
   },
   computed: {
     subtitle() {
@@ -109,6 +112,7 @@ export default {
   .info {
     display: flex;
     align-items: center;
+    gap: 0.5rem;
     .description {
       .title {
         color: $cl-primary;
