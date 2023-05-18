@@ -21,7 +21,11 @@
         <img src="@/assets/icons/code.svg" alt="codeIcon" />
       </TooltipButton>
 
-      <TooltipButton tooltipText="See the Frontmatter" type="icon">
+      <TooltipButton
+        tooltipText="See the Frontmatter"
+        type="icon"
+        @click="handleAdditionalInfo"
+      >
         <img src="@/assets/icons/book.svg" alt="settingsIcon" />
       </TooltipButton>
       <p class="vertical-line"></p>
@@ -45,6 +49,7 @@ export default {
   components: { Button, TooltipButton, Input, Input },
   props: {
     handleSettings: Function,
+    handleAdditionalInfo: Function,
   },
   data() {
     return {

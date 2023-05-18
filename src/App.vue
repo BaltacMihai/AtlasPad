@@ -102,7 +102,10 @@ export default {
 </script>
 
 <template>
-  <Navbar :handleSettings="triggerSettings" />
+  <Navbar
+    :handleSettings="triggerSettings"
+    :handleAdditionalInfo="handleAdditInfo"
+  />
   <div class="app-content">
     <TagsEditor v-model="vmod" class="right" />
     <Settings :handleSettings="triggerSettings" :isOpened="isSettingsOpened" />
