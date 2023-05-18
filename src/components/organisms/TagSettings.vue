@@ -46,6 +46,14 @@
           inputType="resettableInput"
           placeholder="Tag's class"
         />
+
+        <LabeledInput
+          label-name="Link"
+          v-model="tag.content"
+          inputType="resettableInput"
+          placeholder="Tag's source link"
+          v-if="tag.settings.contentType == 'link'"
+        />
         <LabeledInput
           label-name="Custom"
           v-model="tag.attributes.custom"

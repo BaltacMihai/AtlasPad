@@ -4,7 +4,7 @@ function getTagTemplate(fileType) {
       settings: {
         name: "p",
         isMinimized: false,
-        isSettingsOptionOpened: false,
+        isSettingsOptionOpened: true,
         type: "Regular",
         contentType: "text",
       },
@@ -20,7 +20,7 @@ function getTagTemplate(fileType) {
       settings: {
         name: "p",
         isMinimized: false,
-        isSettingsOptionOpened: false,
+        isSettingsOptionOpened: true,
         type: "Regular",
         contentType: "text",
       },
