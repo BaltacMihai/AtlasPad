@@ -10,7 +10,7 @@ import getAdditionalData from "@/data/getAdditionalData.js";
 import handleCloseWindow from "./mixins/handleCloseWindow";
 
 export default {
-  mixins: [handleCloseWindow],
+  // mixins: [handleCloseWindow],
   components: {
     Navbar,
     Settings,
@@ -21,15 +21,15 @@ export default {
   },
   data() {
     return {
-      isSettingsOpened: false,
-      isAdditionalInfoOpened: true,
+      isSettingsOpened: true,
+      isAdditionalInfoOpened: false,
       fileContent: [
         {
           settings: {
             name: "div",
             isMinimized: false,
             isSettingsOptionOpened: true,
-            type: "Regular",
+            type: "Custom",
             contentType: "container",
           },
           attributes: {

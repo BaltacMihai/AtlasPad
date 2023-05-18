@@ -35,11 +35,12 @@
       </TooltipButton>
 
       <Button type="secondary" @click="saveFileAsJSON">Save</Button>
-      <Button type="primary">Export</Button>
+      <Button type="primary" @click="exportFile">Export</Button>
     </div>
   </nav>
 </template>
 <script>
+import exportFile from "../../data/export";
 import saveFile from "../../utils/saveFile";
 import Button from "../atoms/Button.vue";
 import Input from "../atoms/Input.vue";
@@ -62,6 +63,9 @@ export default {
   methods: {
     saveFileAsJSON() {
       saveFile(this.pageSettings, this.additionalInfo, this.fileContent);
+    },
+    exportFile() {
+      exportFile(this.pageSettings, this.additionalInfo, this.fileContent);
     },
   },
 };

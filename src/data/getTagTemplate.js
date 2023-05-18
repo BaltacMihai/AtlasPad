@@ -15,6 +15,22 @@ function getTagTemplate(fileType) {
       },
       content: "",
     };
+  } else {
+    return {
+      settings: {
+        name: "p",
+        isMinimized: false,
+        isSettingsOptionOpened: false,
+        type: "Regular",
+        contentType: "text",
+      },
+      attributes: {
+        class: "",
+        id: "",
+        custom: "",
+      },
+      content: "",
+    };
   }
 }
 
