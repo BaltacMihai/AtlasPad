@@ -34,12 +34,13 @@
         <img src="@/assets/icons/setting.svg" alt="settingsIcon" />
       </TooltipButton>
 
-      <Button type="secondary">Save</Button>
+      <Button type="secondary" @click="saveFileAsJSON">Save</Button>
       <Button type="primary">Export</Button>
     </div>
   </nav>
 </template>
 <script>
+import saveFile from "../../utils/saveFile";
 import Button from "../atoms/Button.vue";
 import Input from "../atoms/Input.vue";
 import TooltipButton from "../molecules/TooltipButton.vue";
@@ -50,11 +51,18 @@ export default {
   props: {
     handleSettings: Function,
     handleAdditionalInfo: Function,
+    fileContent: Object,
+    additionalInfo: Object,
   },
   data() {
     return {
       pageSettings: useFileSettings(),
     };
+  },
+  methods: {
+    saveFileAsJSON() {
+      saveFile(this.pageSettings, this.additionalInfo, this.fileContent);
+    },
   },
 };
 </script>

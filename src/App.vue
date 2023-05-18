@@ -21,7 +21,7 @@ export default {
     return {
       isSettingsOpened: false,
       isAdditionalInfoOpened: true,
-      vmod: [
+      fileContent: [
         {
           settings: {
             name: "div",
@@ -108,9 +108,11 @@ export default {
   <Navbar
     :handleSettings="triggerSettings"
     :handleAdditionalInfo="handleAdditInfo"
+    :fileContent="fileContent"
+    :additionalInfo="additionalInfo"
   />
   <div class="app-content">
-    <TagsEditor v-model="vmod" class="right" />
+    <TagsEditor v-model="fileContent" class="right" />
     <Settings :handleSettings="triggerSettings" :isOpened="isSettingsOpened" />
     <PageAdditionalData
       :additional-info="additionalInfo"
