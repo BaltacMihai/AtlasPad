@@ -38,16 +38,19 @@
           label-name="Id"
           v-model="tag.attributes.id"
           inputType="resettableInput"
+          placeholder="Tag's id"
         />
         <LabeledInput
           label-name="Class"
           v-model="tag.attributes.class"
           inputType="resettableInput"
+          placeholder="Tag's class"
         />
         <LabeledInput
           label-name="Custom"
           v-model="tag.attributes.custom"
           inputType="resettableInput"
+          placeholder="data-example:'ex'"
         />
       </tab>
     </tabs>

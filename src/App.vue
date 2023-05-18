@@ -2,14 +2,23 @@
 import Switch from "./components/atoms/Switch.vue";
 import Select from "./components/molecules/Select.vue";
 import Navbar from "./components/organisms/Navbar.vue";
+import PageAdditionalData from "./components/pages/PageAdditionalData.vue";
 import Settings from "./components/pages/Settings.vue";
 import TagsEditor from "./components/pages/TagsEditor.vue";
 
 export default {
-  components: { Navbar, Settings, Select, Switch, TagsEditor },
+  components: {
+    Navbar,
+    Settings,
+    Select,
+    Switch,
+    TagsEditor,
+    PageAdditionalData,
+  },
   data() {
     return {
       isSettingsOpened: false,
+      isAdditionalInfoOpened: true,
       vmod: [
         {
           settings: {
@@ -74,11 +83,19 @@ export default {
             "https://thumbs.dreamstime.com/b/beautiful-rain-forest-ang-ka-nature-trail-36703721.jpg",
         },
       ],
+      additionalInfo: {
+        frontMatter: "",
+        imports: "",
+        variable: "",
+      },
     };
   },
   methods: {
     triggerSettings() {
       this.isSettingsOpened = !this.isSettingsOpened;
+    },
+    handleAdditInfo() {
+      this.isAdditionalInfoOpened = !this.isAdditionalInfoOpened;
     },
   },
 };
@@ -89,6 +106,11 @@ export default {
   <div class="app-content">
     <TagsEditor v-model="vmod" class="right" />
     <Settings :handleSettings="triggerSettings" :isOpened="isSettingsOpened" />
+    <PageAdditionalData
+      :additional-info="additionalInfo"
+      :is-opened="isAdditionalInfoOpened"
+      :handle-addit-info="handleAdditInfo"
+    />
   </div>
 </template>
 

@@ -6,7 +6,7 @@
     @focusout="inputUnfocus"
     :class="{ focused: isDeleteIconVisible }"
   >
-    <Input v-model="propModel" />
+    <Input v-model="propModel" :placeholder="placeholder" />
     <!-- <input class="input" :value="modelValue" @input="handleInput" ref="input" /> -->
     <Button
       type="icon"
@@ -26,7 +26,12 @@ import Input from "../atoms/Input.vue";
 export default {
   components: { Button, Input },
   mixins: [handleVModel],
-
+  props: {
+    placeholder: {
+      type: String,
+      required: false,
+    },
+  },
   data() {
     return {
       isDeleteIconVisible: false,

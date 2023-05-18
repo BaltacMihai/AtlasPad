@@ -6,6 +6,7 @@
     :value="modelValue"
     @input="handleInput"
     :readonly="readonly"
+    :placeholder="placeholder"
   />
 </template>
 <script>
@@ -21,6 +22,10 @@ export default {
     },
     readonly: {
       type: Boolean,
+      required: false,
+    },
+    placeholder: {
+      type: String,
       required: false,
     },
   },

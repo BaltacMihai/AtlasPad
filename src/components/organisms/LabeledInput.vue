@@ -6,7 +6,12 @@ inputType="simple"
 <template>
   <div class="input-group">
     <label>{{ labelName }}</label>
-    <component :is="inputBuilder" v-model="propModel" :options="options" />
+    <component
+      :is="inputBuilder"
+      v-model="propModel"
+      :options="options"
+      :placeholder="placeholder"
+    />
     <p class="subtext" v-if="subtext">{{ subtext }}</p>
   </div>
 </template>
@@ -24,6 +29,10 @@ export default {
     },
     options: {
       type: Array,
+      required: false,
+    },
+    placeholder: {
+      type: String,
       required: false,
     },
   },
@@ -53,6 +62,9 @@ export default {
           return defineAsyncComponent(() =>
             import("./../molecules/Select.vue")
           );
+        case "Textarea":
+        case "textarea":
+          return defineAsyncComponent(() => import("./../atoms/Textarea.vue"));
       }
     },
   },
