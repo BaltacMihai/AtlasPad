@@ -7,8 +7,10 @@ import Settings from "./components/pages/Settings.vue";
 import TagsEditor from "./components/pages/TagsEditor.vue";
 import { useFileSettings } from "@/stores/FileSettings.js";
 import getAdditionalData from "@/data/getAdditionalData.js";
+import handleCloseWindow from "./mixins/handleCloseWindow";
 
 export default {
+  mixins: [handleCloseWindow],
   components: {
     Navbar,
     Settings,
