@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 export const useFileSettings = defineStore("fileSettings", {
   state: () => ({
     fileName: "New Page",
-    fileType: "mdx",
+    fileType: "html",
   }),
   actions: {
     updateSettings(newSettings) {

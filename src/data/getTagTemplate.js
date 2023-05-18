@@ -1,4 +1,3 @@
-import HTMLNewTag from "./Tags/HTMLNewTag.json";
 function getTagTemplate(fileType) {
   if (fileType !== "md") {
     return {

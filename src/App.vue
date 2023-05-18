@@ -5,6 +5,8 @@ import Navbar from "./components/organisms/Navbar.vue";
 import PageAdditionalData from "./components/pages/PageAdditionalData.vue";
 import Settings from "./components/pages/Settings.vue";
 import TagsEditor from "./components/pages/TagsEditor.vue";
+import { useFileSettings } from "@/stores/FileSettings.js";
+import getAdditionalData from "@/data/getAdditionalData.js";
 
 export default {
   components: {
@@ -83,12 +85,13 @@ export default {
             "https://thumbs.dreamstime.com/b/beautiful-rain-forest-ang-ka-nature-trail-36703721.jpg",
         },
       ],
-      additionalInfo: {
-        frontMatter: "",
-        imports: "",
-        variable: "",
-      },
+      fileSettings: useFileSettings(),
     };
+  },
+  computed: {
+    additionalInfo() {
+      return getAdditionalData(this.fileSettings.fileType);
+    },
   },
   methods: {
     triggerSettings() {
@@ -123,5 +126,9 @@ export default {
   .right {
     width: -webkit-fill-available;
   }
+}
+
+::placeholder {
+  color: $cl-secondary;
 }
 </style>

@@ -65,6 +65,12 @@ export default {
         case "Textarea":
         case "textarea":
           return defineAsyncComponent(() => import("./../atoms/Textarea.vue"));
+
+        case "CustomSwitch":
+        case "customSwitch":
+          return defineAsyncComponent(() =>
+            import("./../molecules/CustomSwitch.vue")
+          );
       }
     },
   },
