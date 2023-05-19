@@ -1,6 +1,6 @@
 export default {
   props: {
-    modelValue: String,
+    modelValue: [String, Array],
   },
   computed: {
     propModel: {

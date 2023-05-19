@@ -60,6 +60,8 @@ export default {
   font-size: $fs-subtext;
   letter-spacing: 0.75px;
 
+  z-index: 999;
+
   right: 0;
   top: 0;
 }

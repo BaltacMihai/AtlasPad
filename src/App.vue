@@ -33,7 +33,7 @@ export default {
       isSettingsOpened: false,
       isAdditionalInfoOpened: false,
       isCodeOpened: true,
-      fileContent: JSON.parse(json),
+      fileContent: [],
       fileSettings: useFileSettings(),
     };
   },
@@ -71,7 +71,11 @@ export default {
       :is-opened="isAdditionalInfoOpened"
       :handle-addit-info="handleAdditInfo"
     />
-    <CodeEditor :is-opened="isCodeOpened" :handle-code="handleCode" />
+    <CodeEditor
+      :is-opened="isCodeOpened"
+      :handle-code="handleCode"
+      v-model="fileContent"
+    />
   </div>
 </template>
 

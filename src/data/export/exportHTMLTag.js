@@ -3,42 +3,42 @@ import renderCodeSnippetContent from "./custom/CodeSnippet";
 export default function generateTags(tag, depth = 0) {
   const indent = " ".repeat(depth);
 
-  if (tag.settings.type == "Custom") {
+  const generateTag = (name, attributes = "", content = "") =>
+    `${indent}<${name}${generateTagAttributesString(
+      attributes
+    )}>${content}</${name}>\n`;
+
+  if (tag.settings.type === "Custom") {
     switch (tag.settings.name) {
       case "CodeSnippet":
-        return `${indent}<${tag.settings.name}${generateTagAttributesString(
-          tag.attributes
-        )} content="${renderCodeSnippetContent(tag.content)}"/>\n`;
+        return generateTag(
+          tag.settings.name,
+          tag.attributes,
+          ` content="${renderCodeSnippetContent(tag.content)}"`
+        );
     }
   }
 
   switch (tag.settings.contentType) {
     case "singleTag":
-      return `${indent}<${tag.settings.name}${generateTagAttributesString(
-        tag.attributes
-      )}/>\n`;
+      return generateTag(tag.settings.name, tag.attributes);
 
     case "text":
-      return `${indent}<${tag.settings.name}${generateTagAttributesString(
-        tag.attributes
-      )}> ${tag.content}</${tag.settings.name}>\n`;
+    case "link":
+      return generateTag(tag.settings.name, tag.attributes, `${tag.content}`);
 
     case "media":
-      return `${indent}<${tag.settings.name}${generateTagAttributesString(
-        tag.attributes
-      )} src=${tag.content}> </${tag.settings.name}>\n`;
-
-    case "link":
-      return `${indent}<${tag.settings.name}${generateTagAttributesString(
-        tag.attributes
-      )}> ${tag.content}</${tag.settings.name}>\n`;
+      return generateTag(tag.settings.name, tag.attributes, " ");
 
     case "container":
-      return `${indent}<${tag.settings.name}${generateTagAttributesString(
-        tag.attributes
-      )}> \n${tag.content
+      const generatedContent = tag.content
         ?.map((tagChild) => generateTags(tagChild, depth + 2))
-        .join("")}\n${indent} </${tag.settings.name}> \n`;
+        .join("");
+      return generateTag(
+        tag.settings.name,
+        tag.attributes,
+        `\n${generatedContent}${indent}`
+      );
   }
 }
 
@@ -46,7 +46,7 @@ function generateTagAttributesString(attributes) {
   const attributesList = [];
   for (const [key, value] of Object.entries(attributes)) {
     if (value && key != "custom") {
-      attributesList.push(`${key}=\`${value}\``);
+      attributesList.push(`${key}=\"${value}\"`);
     }
   }
   if (attributes.custom) {
