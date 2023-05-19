@@ -9,6 +9,7 @@ export default defineConfig({
   base: "/tagless/",
   resolve: {
     alias: {
+      "~@codemirror": "@codemirror",
       "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
   },

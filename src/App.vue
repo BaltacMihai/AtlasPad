@@ -9,7 +9,7 @@ import { useFileSettings } from "@/stores/FileSettings.js";
 import getAdditionalData from "@/data/getAdditionalData.js";
 import handleCloseWindow from "./mixins/handleCloseWindow";
 import htmlToJson from "./data/import/importHTML";
-import Code from "./components/pages/Code.vue";
+import CodeEditor from "./components/pages/CodeEditor.vue";
 
 export default {
   // mixins: [handleCloseWindow],
@@ -20,7 +20,7 @@ export default {
     Switch,
     TagsEditor,
     PageAdditionalData,
-    Code,
+    CodeEditor,
   },
   data() {
     const json = htmlToJson(`
@@ -30,7 +30,7 @@ export default {
       <h1>Lalalalal</h1>
       <img src="https://thumbs.dreamstime.com/b/beautiful-rain-forest-ang-ka-nature-trail-36703721.jpg"> `);
     return {
-      isSettingsOpened: true,
+      isSettingsOpened: false,
       isAdditionalInfoOpened: false,
       isCodeOpened: true,
       fileContent: JSON.parse(json),
@@ -71,7 +71,7 @@ export default {
       :is-opened="isAdditionalInfoOpened"
       :handle-addit-info="handleAdditInfo"
     />
-    <Code :is-opened="isCodeOpened" :handle-code="handleCode" />
+    <CodeEditor :is-opened="isCodeOpened" :handle-code="handleCode" />
   </div>
 </template>
 
