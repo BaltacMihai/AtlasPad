@@ -68,6 +68,7 @@ export default {
             import("@/components/atoms/Textarea.vue")
           );
         case "media":
+          this.tag.content = this.tag.attributes.src;
           return defineAsyncComponent(() =>
             import("@/components/atoms/Image.vue")
           );

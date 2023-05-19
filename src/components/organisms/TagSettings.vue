@@ -48,11 +48,11 @@
         />
 
         <LabeledInput
-          label-name="Link"
-          v-model="tag.content"
+          label-name="Src"
+          v-model="tag.attributes.src"
           inputType="resettableInput"
           placeholder="Tag's source link"
-          v-if="tag.settings.contentType == 'link'"
+          v-if="tag.settings.contentType == 'media'"
         />
         <LabeledInput
           label-name="Custom"

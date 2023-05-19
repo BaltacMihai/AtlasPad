@@ -8,6 +8,8 @@ import TagsEditor from "./components/pages/TagsEditor.vue";
 import { useFileSettings } from "@/stores/FileSettings.js";
 import getAdditionalData from "@/data/getAdditionalData.js";
 import handleCloseWindow from "./mixins/handleCloseWindow";
+import htmlToJson from "./data/import/importHTML";
+import Code from "./components/pages/Code.vue";
 
 export default {
   // mixins: [handleCloseWindow],
@@ -18,75 +20,20 @@ export default {
     Switch,
     TagsEditor,
     PageAdditionalData,
+    Code,
   },
   data() {
+    const json = htmlToJson(`
+      <div class="Class Something" id="IdSomething" data-s:'ceva' custom-data:'altceva'> 
+        <div></div>
+      </div> 
+      <h1>Lalalalal</h1>
+      <img src="https://thumbs.dreamstime.com/b/beautiful-rain-forest-ang-ka-nature-trail-36703721.jpg"> `);
     return {
       isSettingsOpened: true,
       isAdditionalInfoOpened: false,
-      fileContent: [
-        {
-          settings: {
-            name: "div",
-            isMinimized: false,
-            isSettingsOptionOpened: true,
-            type: "Custom",
-            contentType: "container",
-          },
-          attributes: {
-            class: "Class Something",
-            id: "IdSomething",
-            custom: "CustomData:'ceva' CUSTOM-data:'altceva'",
-          },
-          content: [
-            {
-              settings: {
-                name: "div",
-                isMinimized: true,
-                isSettingsOptionOpened: true,
-                type: "Regular",
-                contentType: "text",
-              },
-              attributes: {
-                class: "",
-                id: "",
-                custom: "",
-              },
-              content: "test",
-            },
-          ],
-        },
-        {
-          settings: {
-            name: "h1",
-            isMinimized: true,
-            isSettingsOptionOpened: true,
-            type: "Regular",
-            contentType: "text",
-          },
-          attributes: {
-            class: "",
-            id: "",
-            custom: "",
-          },
-          content: "Lalalalal",
-        },
-        {
-          settings: {
-            name: "img",
-            isMinimized: true,
-            isSettingsOptionOpened: true,
-            type: "Regular",
-            contentType: "media",
-          },
-          attributes: {
-            class: "",
-            id: "",
-            custom: "",
-          },
-          content:
-            "https://thumbs.dreamstime.com/b/beautiful-rain-forest-ang-ka-nature-trail-36703721.jpg",
-        },
-      ],
+      isCodeOpened: true,
+      fileContent: JSON.parse(json),
       fileSettings: useFileSettings(),
     };
   },
@@ -101,6 +48,9 @@ export default {
     },
     handleAdditInfo() {
       this.isAdditionalInfoOpened = !this.isAdditionalInfoOpened;
+    },
+    handleCode() {
+      this.isCodeOpened = !this.isCodeOpened;
     },
   },
 };
@@ -121,6 +71,7 @@ export default {
       :is-opened="isAdditionalInfoOpened"
       :handle-addit-info="handleAdditInfo"
     />
+    <Code :is-opened="isCodeOpened" :handle-code="handleCode" />
   </div>
 </template>
 
