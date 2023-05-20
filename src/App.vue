@@ -10,6 +10,7 @@ import getAdditionalData from "@/data/getAdditionalData.js";
 import handleCloseWindow from "./mixins/handleCloseWindow";
 import htmlToJson from "./data/import/importHTML";
 import CodeEditor from "./components/pages/CodeEditor.vue";
+import handleControlSave from "./mixins/handleControlSave";
 
 export default {
   // mixins: [handleCloseWindow],
@@ -53,6 +54,7 @@ export default {
       this.isCodeOpened = !this.isCodeOpened;
     },
   },
+  mixins: [handleControlSave],
 };
 </script>
 
