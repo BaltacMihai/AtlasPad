@@ -59,6 +59,7 @@ export default {
         this.propModel = JSON.parse(htmlToJson(this.convertedCode));
       } catch (error) {
         this.haveError = true;
+        console.log(error);
       }
     },
   },

@@ -1,4 +1,4 @@
-import renderCodeSnippetContent from "./custom/CodeSnippet";
+import renderCodeSnippetContent from "./custom/CodeSnippet/renderCodeSnippetContent";
 
 export default function generateTags(tag, depth = 0) {
   const indent = " ".repeat(depth);
