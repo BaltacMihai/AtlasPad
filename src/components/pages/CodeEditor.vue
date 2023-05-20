@@ -30,11 +30,15 @@
 <script>
 import SideSheet from "../molecules/SideSheet.vue";
 import { html } from "~@codemirror/lang-html";
+import { css } from "~@codemirror/lang-css";
+import { javascript } from "~@codemirror/lang-javascript";
+import { markdown } from "~@codemirror/lang-markdown";
 import { oneDark } from "~@codemirror/theme-one-dark";
 import TooltipButton from "../molecules/TooltipButton.vue";
 import handleVModel from "@/mixins/handleVModel";
 import exportHTMLTag from "@/data/export/exportHTMLTag.js";
 import htmlToJson from "../../data/import/importHTML";
+import { useFileSettings } from "@/stores/FileSettings.js";
 
 export default {
   mixins: [handleVModel],
@@ -79,13 +83,18 @@ export default {
         this.convertedCode = newValue;
       },
     },
+    extensions() {
+      if (this.pageSettings.fileType != "md")
+        return [html(), css(), javascript(), oneDark];
+      return [markdown(), oneDark];
+    },
   },
   data() {
     return {
-      extensions: [html(), oneDark],
       haveError: false,
       itsModified: false,
       convertedCode: "",
+      pageSettings: useFileSettings(),
     };
   },
 };
