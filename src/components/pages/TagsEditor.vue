@@ -12,7 +12,7 @@
       </template>
     </draggable>
     <Button type="primary" @click="addTag">
-      <img src="@/assets/icons/addItem.svg" alt="add Item Svg" />
+      <img src="@/assets/icons/additem.svg" alt="add Item Svg" />
       Add Tag
     </Button>
   </div>
