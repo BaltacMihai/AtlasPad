@@ -9,4 +9,5 @@ v1.2.0 - [Feature] LocalStorage Created
 v1.2.1 - [Bug] Solved Custom Components not render at export + not consistency icon for it
 v1.2.2 - [Bug] Invalid Input for Custom Components
 v1.2.3 - [Bug] Circular Data error solved
-v1.2.4 - [Issue] Added New Custom Tag 
+v1.2.4 - [Issue] Added New Custom Tag
+v2.0.0 - MVP launched
