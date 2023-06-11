@@ -17,7 +17,7 @@
       </TooltipButton>
       <p class="vertical-line"></p>
 
-      <TooltipButton tooltipText="See the Code" type="icon">
+      <TooltipButton tooltipText="See the Code" type="icon" @click="handleCode">
         <img src="@/assets/icons/code.svg" alt="codeIcon" />
       </TooltipButton>
 
@@ -52,6 +52,7 @@ export default {
   props: {
     handleSettings: Function,
     handleAdditionalInfo: Function,
+    handleCode: Function,
     fileContent: Object,
     additionalInfo: Object,
   },

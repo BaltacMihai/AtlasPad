@@ -62,6 +62,7 @@ export default {
   <Navbar
     :handleSettings="triggerSettings"
     :handleAdditionalInfo="handleAdditInfo"
+    :handle-code="handleCode"
     :fileContent="fileContent"
     :additionalInfo="additionalInfo"
   />
